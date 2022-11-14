@@ -1,0 +1,4 @@
+on place:
+	Set {_name} to "%(uncoloured line 1 of lore of player's tool)%"
+	if {_name} contains "Chleba upeceny nejlepsimi":
+		cancel event

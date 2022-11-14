@@ -1,0 +1,17 @@
+CarodejPotionHod:
+#  Cooldown: 10
+  Skills:
+  - equip{item=DlordovoDalsiUpdate:5} @self
+  - delay 100
+  - equip{item=Nic:5} @self
+  - projectile{onTick=CarodejPotionHod-Tick;onEnd=CarodejPotionHod-End;v=7;i=1;hR=0;vR=0;tyo=5;syo=1;hO=0;g=0.7;vO=0;hp=false} @target
+  - delay 15
+CarodejPotionHod-Tick:
+  Skills:
+  - effect:particlesphere{particle=reddust;color=#8b6316;amount=10;speed=0;hR==1;vR==1;radius=0.2;speed=0.07} @origin
+CarodejPotionHod-End:
+  Skills:
+  - effect:particlesphere{particle=spell;color=#8b6316;amount=10;speed=0;hR==1;vR==1;radius=0.2;speed=0.07} @origin
+  - potion{type=SLOW;duration=40;lvl=0} @PIR{r=5}
+  - potion{type=HARM;duration=1;lvl=2} @PIR{r=5}
+  - sound {s=minecraft:block.glass.break;volume=2;pitch=1} @self

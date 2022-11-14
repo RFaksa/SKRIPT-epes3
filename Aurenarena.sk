@@ -1,0 +1,306 @@
+command /arena [<text>] [<player>] [<text>]:
+	executable by: player
+	trigger:
+		if arg-1 is not set:
+			send "&8&l============================================" to player
+			send "&6&lAurenska elitni pestni arena" to player
+			send "&ePrikazem:" to player
+			send "      &6/arena &dinvite &5<jmeno hrace> &a<castka>" to player
+			send "            &ezalozis arenu o drahocenne penize!" to player
+			send "&ePrikazem:" to player
+			send "      &6/arena accept &e<jmeno vyzivatele>" to player
+			send "            &ese pripojis k hraci, ktery arenu zalozil a pozval te!" to player
+			send "" to player
+			send "&cV arene se bojuje 3 minuty o titul vladce areny!" to player
+			send "&8&l============================================" to player
+		if arg-1 is "invite":
+			if arg-2 and arg-3 is set:
+				if difference between {auren_.arena_pozvani} and now is less than 1 minutes:
+					send "&cMomentalne se do areny prihlasuji hraci &e%{auren_.arena_Hrac1}% &ca &e%{auren_.arena_Hrac2}%" to player
+					stop
+				if {auren_.arena_zapas} is set:
+					send "&cMomentalne je arena obsazena hraci &e%{auren_.arena_Hrac1}% &ca &e%{auren_.arena_Hrac2}%" to player
+					stop
+				if {auren_.arena_ucast::%player%} is not set:
+					send "&cNemuzes se prozatim ucastnit zapasu!" to player
+					stop
+				set {auren_.arena_Hrac1} to player
+				set {auren_.arena_Hrac2} to "%arg-2%" parsed as player
+				set {auren_.arena_Sazka} to "%arg-3%" parsed as number
+				if {auren_.arena_Hrac1} is {auren_.arena_Hrac2}:
+					send "&cAckoliv mas rozdvojenou osobnost, tak nemuzes bojovat sam se sebou!" to player
+					stop
+				if {auren_.arena_Hrac1}'s balance is less than {auren_.arena_Sazka}:
+					send "&cNemas dostatecne mnozstvi penez na zapas" to player
+					stop
+				if {auren_.arena_Hrac2}'s balance is less than {auren_.arena_Sazka}:
+					send "&cNemas dostatecne mnozstvi penez na zapas" to {auren_.arena_Hrac2}
+					stop
+				send "&a&l========================================" to player
+				send "&5Vyzval si %{auren_.arena_Hrac2}% na souboj v aurenske arene!" to player
+				send "&a&l========================================" to player
+				send "&a&l========================================" to arg-2
+				send "&5Hrac %{auren_.arena_Hrac1}% te vyziva na souboj o &a%{auren_.arena_Sazka}%$&5!" to arg-2
+				send "&5prijmes ho &6/arena accept &e<jmeno vyzivatele>" to arg-2
+				send "&a&l========================================" to arg-2
+				set {auren_.arena_pozvani} to now
+				wait 1 minute
+				if {auren_.arena_zapas} is not set:
+					send "&cSouboj nebude uskutecnen!" to {auren_.arena_Hrac1}
+					send "&cSouboj nebude uskutecnen!" to {auren_.arena_Hrac2}
+					delete {auren_.arena_Hrac1}
+					delete {auren_.arena_Hrac2}
+					delete {auren_.arena_Sazka}
+					stop
+				loop 6 times:
+					wait 30 seconds
+					if {auren_.arena_zapas} is not set:
+						stop
+				if {auren_.arena_zapas} is 1:
+					send "&cVas cas v arene vyprsel!" to {auren_.arena_Hrac1}
+					send "&cVas cas v arene vyprsel!" to {auren_.arena_Hrac2}
+					execute console command "/spawn %{auren_.arena_Hrac1}%"
+					execute console command "/spawn %{auren_.arena_Hrac2}%"	
+					delete {auren_.arena_Hrac1}
+					delete {auren_.arena_Hrac2}
+					delete {auren_.arena_Sazka}
+					delete {auren_.arena_zapas}
+					delete {auren_.arena_pozvani}
+			else:
+				send "&cMusis do areny pozvat hrace a nastavit sazku!" to player
+		if arg-1 is "accept":
+			if {auren_.arena_Hrac2} is not player:
+				send "&cNebyl si vyzvan k zapasu!" to player
+				stop
+			if {auren_.arena_ucast::%{auren_.arena_Hrac2}%} is not set:
+				send "&cNemuzes se prozatim ucastnit zapasu!" to {auren_.arena_Hrac2}
+				send "&c%{auren_.arena_Hrac2}% se prozatim nemuze ucastnit zapasu!" to {auren_.arena_Hrac1}
+				stop
+			if difference between {posledni.utok.hit.%player%} and now is less than 5 seconds:
+				send "&c%player% je v combatu!" to {auren_.arena_Hrac1}
+				send "&c%player% je v combatu!" to {auren_.arena_Hrac2}
+				stop
+			if difference between {posledni.utok.hit.%arg-2%} and now is less than 5 seconds:
+				send "&c%player% je v combatu!" to {auren_.arena_Hrac1}
+				send "&c%player% je v combatu!" to {auren_.arena_Hrac2}
+				stop
+			set {_auren_arena_inv} to 0
+			loop all items in the inventory of {auren_.arena_Hrac1}:
+				add 1 to {_auren_arena_inv}
+				if {_auren_arena_inv} isn't 0:
+					set {auren_arena_Prazdny_inv_vysledek} to 1
+					send "&cNemas prazdny inventar, proto se zapas nekona!" to {auren_.arena_Hrac1}
+					stop
+			set {_auren_arena_inv} to 0
+			loop all items in the inventory of {auren_.arena_Hrac2}:
+				add 1 to {_auren_arena_inv}
+				if {_auren_arena_inv} isn't 0:
+					set {auren_arena_Prazdny_inv_vysledek} to 1
+					send "&cNemas prazdny inventar, proto se zapas nekona!" to {auren_.arena_Hrac2}
+					stop
+			if {auren_.arena_Hrac1}'s balance is less than {auren_.arena_Sazka}:
+				send "&cNemas dostatecne mnozstvi penez na zapas" to {auren_.arena_Hrac1}
+				stop
+			if {auren_.arena_Hrac2}'s balance is less than {auren_.arena_Sazka}:
+				send "&cNemas dostatecne mnozstvi penez na zapas" to {auren_.arena_Hrac2}
+				stop
+			set {auren_.arena_zapas} to 1
+			execute console command "/tppos %{auren_.arena_Hrac1}% -1147.5 69 -931.5 world"
+			execute console command "/tppos %{auren_.arena_Hrac2}% -1147.5 69 -931.5 world"
+			wait 5 seconds
+			execute console command "/tppos %{auren_.arena_Hrac1}% -1147.5 69 -927.5 world"
+			execute console command "/tppos %{auren_.arena_Hrac2}% -1147.5 69 -915.5 world 0 180"
+on death of player:
+	if {auren_.arena_Hrac1} is "%player%":
+		force {auren_.arena_Hrac1} to respawn
+		execute console command "/spawn %{auren_.arena_Hrac1}%"
+		execute console command "/spawn %{auren_.arena_Hrac2}%"
+		delete {auren_.arena_zapas}
+		if {auren_.arena_Hrac1}'s balance is less than {auren_.arena_Sazka}:
+			execute console command "/jail {auren_.arena_Hrac1} hrad"
+			send "&cPokus o podvod!" to player
+			stop
+		else:
+			execute console command "/eco take %{auren_.arena_Hrac1}% %{auren_.arena_Sazka}%"
+			execute console command "/eco give %{auren_.arena_Hrac2}% %{auren_.arena_Sazka}%"
+			broadcast "&e%{auren_.arena_Hrac2}%&c vyhral pestni souboj s &e%{auren_.arena_Hrac1}% &cv aurenske arene!"
+			delete {auren_.arena_Hrac1}
+			delete {auren_.arena_Hrac2}
+	if {auren_.arena_Hrac2} is "%player%":
+		delete {auren_.arena_zapas}
+		force {auren_.arena_Hrac2} to respawn
+		execute console command "/spawn %{auren_.arena_Hrac1}%"
+		execute console command "/spawn %{auren_.arena_Hrac2}%"
+		if {auren_.arena_Hrac2}'s balance is less than {auren_.arena_Sazka}:
+			execute console command "/jail {auren_.arena_Hrac2} hrad"
+			send "&cPokus o podvod!" to player
+			stop
+		else:
+			execute console command "/eco take %{auren_.arena_Hrac2}% %{auren_.arena_Sazka}%"
+			execute console command "/eco give %{auren_.arena_Hrac1}% %{auren_.arena_Sazka}%"
+			broadcast "&e%{auren_.arena_Hrac1}%&c vyhral pestni souboj s &e%{auren_.arena_Hrac2}% &cv aurenske arene!"
+			delete {auren_.arena_Hrac1}
+			delete {auren_.arena_Hrac2}
+on logout:
+	if {auren_.arena_zapas} is 1:
+		if {auren_.arena_Hrac1} is "%player%":
+			force {auren_.arena_Hrac1} to respawn
+			execute console command "/spawn %{auren_.arena_Hrac1}%"
+			execute console command "/spawn %{auren_.arena_Hrac2}%"
+			delete {auren_.arena_zapas}
+			if {auren_.arena_Hrac1}'s balance is less than {auren_.arena_Sazka}:
+				execute console command "/jail {auren_.arena_Hrac1} hrad"
+				send "&cPokus o podvod!" to player
+				stop
+			else:
+				execute console command "/eco take %{auren_.arena_Hrac1}% %{auren_.arena_Sazka}%"
+				execute console command "/eco give %{auren_.arena_Hrac2}% %{auren_.arena_Sazka}%"
+				broadcast "&e%{auren_.arena_Hrac2}%&c vyhral pestni souboj s &e%{auren_.arena_Hrac1}% &cv aurenske arene!"
+				delete {auren_.arena_Hrac1}
+				delete {auren_.arena_Hrac2}
+		if {auren_.arena_Hrac2} is "%player%":
+			delete {auren_.arena_zapas}
+			force {auren_.arena_Hrac2} to respawn
+			execute console command "/spawn %{auren_.arena_Hrac1}%"
+			execute console command "/spawn %{auren_.arena_Hrac2}%"
+			if {auren_.arena_Hrac2}'s balance is less than {auren_.arena_Sazka}:
+				execute console command "/jail {auren_.arena_Hrac2} hrad"
+				send "&cPokus o podvod!" to player
+				stop
+			else:
+				execute console command "/eco take %{auren_.arena_Hrac2}% %{auren_.arena_Sazka}%"
+				execute console command "/eco give %{auren_.arena_Hrac1}% %{auren_.arena_Sazka}%"
+				broadcast "&e%{auren_.arena_Hrac1}%&c vyhral pestni souboj s &e%{auren_.arena_Hrac1}% &cv aurenske arene!"
+				delete {auren_.arena_Hrac1}
+				delete {auren_.arena_Hrac2}
+
+
+command /aurenarenaquest <player>:
+	executable by: player and console
+	permission: prehled.admin
+	trigger:
+		if arg 1 is set:
+			set {auren_.arena_ucast::%arg-1%} to 1
+
+
+
+on click with diamond hoe:
+	if lore of player's tool contains "&aCokoladovy predmet vhodny ke snezeni":
+		if player is not "ArkenThas" or "CzechMinerCZ" or "_col_" or "TheDarkLord173" or "razingchaos":
+			execute console command "warn %player% Nepovolene pouziti itemu"
+		if difference between {cooldownpera::%player%} and now is less than 1 minute:
+			send "&cNemas nacteny cooldown" to player
+			stop
+		if difference between {caskytka} and now is less than 2 seconds:
+			send "&cNemas nacteny cooldown" to player
+			stop
+		if player is in world "world" or "war" or "Chimera" or "pvp":
+			set {_target} to targeted player
+			if distance between {_target} and player < 25:
+				set {cooldownpera::%player%} to now
+				set {caskytka} to now
+				make {_target} run command "mm m spawn SkriptKnihaEnd" as op
+				make player run command "mm m spawn SkriptKnihaStart" as op
+
+command /aurendzinpisek1:
+	executable by: player and console
+	permission: prehled.admin
+	trigger:
+		set block at location at 9864, 133, -9151 in world "war" to sand:1
+		set block at location at 9864, 129, -9157 in world "war" to sand:1
+		set block at location at 9874, 131, -9154 in world "war" to sand:1
+		set block at location at 9883, 130, -9140 in world "war" to sand:1
+		set block at location at 9875, 133, -9136 in world "war" to sand:1
+		set block at location at 9866, 135, -9146 in world "war" to sand:1
+		set block at location at 9863, 133, -9138 in world "war" to sand:1
+		set block at location at 9858, 132, -9142 in world "war" to sand:1
+		set block at location at 9876, 134, -9144 in world "war" to sand:1
+		set block at location at 9866, 131, -9130 in world "war" to sand:1
+		wait 1.5 seconds
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9864.5,115,-9151.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9864.5,115,-9157.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9874.5,115,-9154.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9883.5,115,-9140.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9875.5,115,-9136.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9866.5,115,-9146.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9863.5,115,-9138.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9858.5,115,-9142.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9876.5,115,-9144.5"
+		execute console command "/mm mobs spawn DzinPisek1 1 war,9866.5,115,-9130.5"
+		wait 8.5 seconds
+		set block at location at 9864, 115, -9151 in world "war" to air
+		set block at location at 9864, 115, -9157 in world "war" to air
+		set block at location at 9874, 115, -9154 in world "war" to air
+		set block at location at 9883, 115, -9140 in world "war" to air
+		set block at location at 9875, 115, -9136 in world "war" to air
+		set block at location at 9866, 115, -9146 in world "war" to air
+		set block at location at 9863, 115, -9138 in world "war" to air
+		set block at location at 9858, 115, -9142 in world "war" to air
+		set block at location at 9876, 115, -9144 in world "war" to air
+		set block at location at 9866, 115, -9130 in world "war" to air
+command /aurendzinpisek2:
+	executable by: player and console
+	permission: prehled.admin
+	trigger:
+		set block at location at 9869, 135, -9145 in world "war" to sand
+		set block at location at 9868, 135, -9144 in world "war" to sand
+		set block at location at 9868, 135, -9143 in world "war" to sand
+		set block at location at 9867, 135, -9142 in world "war" to sand
+		set block at location at 9868, 135, -9141 in world "war" to sand
+		set block at location at 9869, 135, -9140 in world "war" to sand
+		set block at location at 9869, 135, -9141 in world "war" to sand
+		set block at location at 9870, 135, -9141 in world "war" to sand
+		set block at location at 9871, 135, -9142 in world "war" to sand
+		set block at location at 9870, 135, -9143 in world "war" to sand
+		set block at location at 9870, 135, -9144 in world "war" to sand
+		set block at location at 9870, 135, -9142 in world "war" to sand
+		set block at location at 9868, 135, -9142 in world "war" to sand
+		wait 0.3 seconds
+		set block at location at 9869, 135, -9144 in world "war" to sand
+		set block at location at 9869, 135, -9143 in world "war" to sand
+		set block at location at 9869, 135, -9142 in world "war" to sand
+		set block at location at 9868, 134, -9143 in world "war" to sand
+		set block at location at 9868, 135, -9142 in world "war" to sand
+		set block at location at 9870, 135, -9142 in world "war" to sand
+		wait 0.3 seconds
+		set block at location at 9869, 135, -9143 in world "war" to sand
+		set block at location at 9869, 135, -9142 in world "war" to sand
+command /aurendzinpisek3:
+	executable by: player and console
+	permission: prehled.admin
+	trigger:
+		set block at location at 9869, 115, -9145 in world "war" to air
+		set block at location at 9868, 115, -9144 in world "war" to air
+		set block at location at 9868, 115, -9143 in world "war" to air
+		set block at location at 9867, 115, -9142 in world "war" to air
+		set block at location at 9868, 115, -9141 in world "war" to air
+		set block at location at 9869, 115, -9140 in world "war" to air
+		set block at location at 9869, 115, -9141 in world "war" to air
+		set block at location at 9870, 115, -9141 in world "war" to air
+		set block at location at 9871, 115, -9142 in world "war" to air
+		set block at location at 9870, 115, -9143 in world "war" to air
+		set block at location at 9870, 115, -9144 in world "war" to air
+		set block at location at 9870, 115, -9142 in world "war" to air
+		set block at location at 9868, 115, -9142 in world "war" to air
+		set block at location at 9869, 116, -9144 in world "war" to air
+		set block at location at 9869, 116, -9143 in world "war" to air
+		set block at location at 9869, 116, -9142 in world "war" to air
+		set block at location at 9868, 116, -9143 in world "war" to air
+		set block at location at 9868, 116, -9142 in world "war" to air
+		set block at location at 9870, 116, -9142 in world "war" to air
+		set block at location at 9869, 117, -9143 in world "war" to air
+		set block at location at 9869, 117, -9142 in world "war" to air
+
+
+
+
+
+
+
+
+
+
+
+
+
+

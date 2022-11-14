@@ -1,0 +1,1085 @@
+# ===============================================================================================
+# ============================ SKRIPTY NA FUNGOVANI CELEHO UPDATU ===============================
+# ===================================== by TheDarkLord173 =======================================
+# ===============================================================================================
+on load:
+	if {Kralovstvi_Hrad.%server%} is not set:
+		set {Kralovstvi_Hrad.%server%} to 0
+	if {Kralovstvi_Hrad_ohen1} is not set:
+		set {Kralovstvi_Hrad_ohen1} to 0
+	if {Kralovstvi_Hrad_ohen2} is not set:
+		set {Kralovstvi_Hrad_ohen2} to 0
+	if {Kralovstvi_Hrad_ohen3} is not set:
+		set {Kralovstvi_Hrad_ohen3} to 0
+	if {Kralovstvi_Hrad_ohen4} is not set:
+		set {Kralovstvi_Hrad_ohen4} to 0
+	if {Kralovstvi_Hrad_teleportkral} is not set:
+		set {Kralovstvi_Hrad_teleportkral} to 0
+	if {Kralovstvi_Hrad_lokacebrany1} is not set:
+		set {Kralovstvi_Hrad_lokacebrany1} to location at -2974, 101, -700 in world "war"
+	if {Kralovstvi_Hrad_lokacebrany2} is not set:
+		set {Kralovstvi_Hrad_lokacebrany2} to location at -2974, 101, -702 in world "war"
+	if {Kralovstvi_Hrad_lokacebrany3} is not set:
+		set {Kralovstvi_Hrad_lokacebrany3} to location at -2974, 102, -700 in world "war"
+	if {Kralovstvi_Hrad_lokacebrany4} is not set:
+		set {Kralovstvi_Hrad_lokacebrany4} to location at -2974, 102, -702 in world "war"
+	if {Kralovstvi_Hrad_lokaceportalu1} is not set:
+		set {Kralovstvi_Hrad_lokaceportalu1} to location at -2989, 93, -698 in world "war"
+	if {Kralovstvi_Hrad_lokaceportalu2} is not set:
+		set {Kralovstvi_Hrad_lokaceportalu2} to location at -2993, 93, -702 in world "war"
+	if {Kralovstvi_Hrad_lokacekralovstvi} is not set:
+		set {Kralovstvi_Hrad_lokacekralovstvi} to location at -2943, 113, -689 in world "war"
+	if {Kralovstvi_Hrad_lokacehospoda} is not set:
+		set {Kralovstvi_Hrad_lokacehospoda} to location at -2708, 79, -702 in world "war"
+	if {Kralovstvi_Hrad_lokaceportal} is not set:
+		set {Kralovstvi_Hrad_lokaceportal} to location at -801, 81, 381 in world "world"
+	if {Kralovstvi_Hrad_lokaceknihovny1} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny1} to location at -2899, 115, -736 in world "war"
+	if {Kralovstvi_Hrad_lokaceknihovny2} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny2} to location at -2895, 115, -740 in world "war"
+	if {Kralovstvi_Hrad_lokaceknihovny3} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny3} to location at -2898.5, 102, -808.5 in world "war"
+	if {Kralovstvi_Hrad_lokaceknihovny4} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny4} to location at -2901, 102, -808 in world "war"
+	if {Kralovstvi_Hrad_lokaceknihovny5} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny5} to location at -2897, 102, -806 in world "war"
+	if {Kralovstvi_Hrad_lokaceknihovny6} is not set:
+		set {Kralovstvi_Hrad_lokaceknihovny6} to location at -2896.5, 115, -735.5 in world "war"
+	if {Kralovstvi_Hrad_vstupdolokace1} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace1} to location at -798, 81, 380 in world "world"
+	if {Kralovstvi_Hrad_vstupdolokace2} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace2} to location at -805, 81, 377 in world "world"
+	if {Kralovstvi_Hrad_vstupdolokace3} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace3} to location at -2707, 81, -680 in world "war"
+	if {Kralovstvi_Hrad_vstupdolokace4} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace4} to location at -2705, 81, -683 in world "war"
+	if {Kralovstvi_Hrad_vstupdolokace5} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace5} to location at -2703, 81, -677 in world "war"
+	if {Kralovstvi_Hrad_vstupdolokace6} is not set:
+		set {Kralovstvi_Hrad_vstupdolokace6} to location at -802, 81, 381 in world "world"
+# ===============================================================================================
+# ================================== SBIRANI BODU ZA ZABITI =====================================
+# ===============================================================================================
+on death:
+	attacker is a player
+	if name of victim is "Zaklety carodej" or "Proklety rytir":
+		add 1 to {Kralovstvi_Hrad.%server%}
+		send "&aBylo zabito &c%{Kralovstvi_Hrad.%server%}%/200 &anemrtvych!" to attacker
+# ===============================================================================================
+# ======================================== SMRT V TEMNOTE =======================================
+# ===============================================================================================
+on step on glass block:
+	set {Kralovstvi_Hrad_lokace1} to location at -2798, 74, -542 in world "war"
+	set {Kralovstvi_Hrad_lokace2} to location at -2923, 74, -620 in world "war"
+	if player is within {Kralovstvi_Hrad_lokace1} to {Kralovstvi_Hrad_lokace2}:
+		kill the player
+# ===============================================================================================
+# =========================================== PORTALY ===========================================
+# ===============================================================================================
+on step on cyan hardened clay block:
+	set {Kralovstvi_Hrad_lokaceportalu1} to location at -2996, 93, -697 in world "war"
+	set {Kralovstvi_Hrad_lokaceportalu2} to location at -2992, 93, -704 in world "war"
+	if player is within {Kralovstvi_Hrad_lokaceportalu1} to {Kralovstvi_Hrad_lokaceportalu2}:
+		if player has permission "Kralovstvi_Hrad.event":
+			if {Kralovstvi_Hrad_teleportkral} is 1:
+				send "&7Byl si teleportovan na kralovsky turnaj." to player
+				teleport player to location -3139, 68, (random integer between -717 and -719) in world "war"
+			if {Kralovstvi_Hrad_teleportkral} is 0:
+				cancel event
+	set {Kralovstvi_Hrad_lokaceknihovny1} to location at -2899, 115, -736 in world "war"
+	set {Kralovstvi_Hrad_lokaceknihovny2} to location at -2895, 115, -740 in world "war"
+	set {Kralovstvi_Hrad_lokaceknihovny3} to location at -2898.5, 102, -808.5 in world "war"
+	set {Kralovstvi_Hrad_lokaceknihovny4} to location at -2901, 102, -808 in world "war"
+	set {Kralovstvi_Hrad_lokaceknihovny5} to location at -2897, 102, -806 in world "war"
+	set {Kralovstvi_Hrad_lokaceknihovny6} to location at -2896.5, 115, -735.5 in world "war"
+	set {Kralovstvi_Hrad_vstupdolokace1} to location at -798, 81, 380 in world "world"
+	set {Kralovstvi_Hrad_vstupdolokace2} to location at -805, 81, 377 in world "world"
+	set {Kralovstvi_Hrad_vstupdolokace3} to location at -2707, 81, -680 in world "war"
+	set {Kralovstvi_Hrad_vstupdolokace4} to location at -2705, 81, -683 in world "war"
+	set {Kralovstvi_Hrad_vstupdolokace5} to location at -2703, 81, -677 in world "war"
+	set {Kralovstvi_Hrad_vstupdolokace6} to location at -802, 81, 381 in world "world"
+	if player is within {Kralovstvi_Hrad_lokaceknihovny1} to {Kralovstvi_Hrad_lokaceknihovny2}:
+		if player has permission "Kralovstvi_Hrad.knihovna":
+			teleport player to location of {Kralovstvi_Hrad_lokaceknihovny3}
+	if player is within {Kralovstvi_Hrad_lokaceknihovny4} to {Kralovstvi_Hrad_lokaceknihovny5}:
+		if player has permission "Kralovstvi_Hrad.knihovna":
+			teleport player to location of {Kralovstvi_Hrad_lokaceknihovny6}
+	if player is within {Kralovstvi_Hrad_vstupdolokace1} to {Kralovstvi_Hrad_vstupdolokace2}:
+		if player has permission "Kralovstvi_Hrad.lokace":
+			teleport player to location of {Kralovstvi_Hrad_vstupdolokace3}
+	if player is within {Kralovstvi_Hrad_vstupdolokace4} to {Kralovstvi_Hrad_vstupdolokace5}:
+		if player has permission "Kralovstvi_Hrad.lokace":
+			teleport player to location of {Kralovstvi_Hrad_vstupdolokace6}
+# ===============================================================================================
+# =========================================== EVENT =============================================
+# ===============================================================================================
+command /hrad [<text>] [<num>]:
+	permission: Kralovstvi_Hrad.admin
+	permission message: &c&l[HRAD]&7&lYou do not have permission.
+	executable by: player and console
+	trigger:
+		string-arg 1 is "":
+			send "&aBylo zabito &c%{Kralovstvi_Hrad.%server%}%/200 &anemrtvych!"
+		string-arg 1 is "start":
+			if {Kralovstvi_Hrad.%server%} is between 0 and 199:
+				set {Kralovstvi_Hrad.%server%} to 0
+				send "&cBohuzel se vam nepovedlo zabit dostatecne mnozstvi prokletych." to all players
+			if {Kralovstvi_Hrad.%server%} is more than 199:
+				command "zazehnuti -2977 102 -698 war"
+				command "zazehnuti -2977 102 -704 war"
+				play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				wait 2 seconds
+				command "zazehnuti -2981 100 -698 war"
+				command "zazehnuti -2981 100 -704 war"
+				play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				wait 2 seconds
+				command "zazehnuti -2985 98 -698 war"
+				command "zazehnuti -2985 98 -704 war"
+				play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				wait 2 seconds
+				command "zazehnuti -2989 96 -698 war"
+				command "zazehnuti -2989 96 -704 war"
+				play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				wait 2 seconds
+				set blocks within {Kralovstvi_Hrad_lokacebrany1} and {Kralovstvi_Hrad_lokacebrany2} to air
+				play raw resourcepack sound "brana" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				wait 1 second
+				set blocks within {Kralovstvi_Hrad_lokacebrany3} and {Kralovstvi_Hrad_lokacebrany4} to air
+				wait 2 seconds
+				set {Kralovstvi_Hrad_teleportkral} to 1
+				play raw resourcepack sound "kouzlox5" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				play raw resourcepack sound "kouzlox5" to all players at {Kralovstvi_Hrad_lokaceportalu1}
+				wait 27 seconds
+				play raw resourcepack sound "brana" to all players at {Kralovstvi_Hrad_lokacebrany1}
+				set {Kralovstvi_Hrad_teleportkral} to 0
+				set blocks within {Kralovstvi_Hrad_lokacebrany3} and {Kralovstvi_Hrad_lokacebrany4} to iron_bars
+				wait 1 second
+				set blocks within {Kralovstvi_Hrad_lokacebrany1} and {Kralovstvi_Hrad_lokacebrany2} to iron_bars
+				command "mm m spawn Carodej 1 war,-2956,100,-700"
+				send "&6&lObjevil se kral" to all players
+				wait 3 seconds
+				command "zhasnuti -2977 102 -698 war"
+				command "zhasnuti -2977 102 -704 war"
+				wait 3 seconds
+				command "zhasnuti -2981 100 -698 war"
+				command "zhasnuti -2981 100 -704 war"
+				wait 3 seconds
+				command "zhasnuti -2985 98 -698 war"
+				command "zhasnuti -2985 98 -704 war"
+				wait 3 seconds
+				command "zhasnuti -2989 96 -698 war"
+				command "zhasnuti -2989 96 -704 war"
+				set {Kralovstvi_Hrad.%server%} to 0
+				wait 10 seconds
+			command "zhasnuti -2969 105 -693 war"
+			set {Kralovstvi_Hrad_ohen1} to 0
+			command "zhasnuti -2970 105 -696 war"
+			set {Kralovstvi_Hrad_ohen2} to 0
+			command "zhasnuti -2970 105 -706 war"
+			set {Kralovstvi_Hrad_ohen3} to 0
+			command "zhasnuti -2969 105 -709 war"
+			set {Kralovstvi_Hrad_ohen4} to 0
+		string-arg 1 is "zabiti":
+			if {Kralovstvi_Hrad.%server%} is between 0 and 49:
+				command "zhasnuti -2969 105 -693 war"
+				command "zhasnuti -2970 105 -696 war"
+				command "zhasnuti -2970 105 -706 war"
+				command "zhasnuti -2969 105 -709 war"
+				set {Kralovstvi_Hrad_ohen1} to 0
+				set {Kralovstvi_Hrad_ohen2} to 0
+				set {Kralovstvi_Hrad_ohen3} to 0
+				set {Kralovstvi_Hrad_ohen4} to 0
+			if {Kralovstvi_Hrad.%server%} is between 50 and 99:
+				if {Kralovstvi_Hrad_ohen1} is 0:
+					command "zazehnuti -2969 105 -693 war"
+					send "&6Byl zazehnut prvni ohen..." to all players
+					play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+					set {Kralovstvi_Hrad_ohen1} to 1
+			if {Kralovstvi_Hrad.%server%} is between 100 and 149:
+				if {Kralovstvi_Hrad_ohen2} is 0:
+					command "zazehnuti -2969 105 -693 war"
+					command "zazehnuti -2970 105 -696 war"
+					send "&6Byl zazehnut druhy ohen..." to all players
+					play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+					set {Kralovstvi_Hrad_ohen2} to 1
+			if {Kralovstvi_Hrad.%server%} is between 150 and 199:
+				if {Kralovstvi_Hrad_ohen3} is 0:
+					command "zazehnuti -2969 105 -693 war"
+					command "zazehnuti -2970 105 -696 war"
+					command "zazehnuti -2970 105 -706 war"
+					send "&6Byl zazehnut treti ohen..." to all players
+					play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+					set {Kralovstvi_Hrad_ohen3} to 1
+			if {Kralovstvi_Hrad.%server%} is more than 199:
+				if {Kralovstvi_Hrad_ohen4} is 0:
+					command "zazehnuti -2969 105 -693 war"
+					command "zazehnuti -2970 105 -696 war"
+					command "zazehnuti -2970 105 -706 war"
+					command "zazehnuti -2969 105 -709 war"
+					send "&6Byl zazehnut ctvrty ohen..." to all players
+					play raw resourcepack sound "podpaleni" to all players at {Kralovstvi_Hrad_lokacebrany1}
+					set {Kralovstvi_Hrad_ohen4} to 1
+		string-arg 1 is "add":
+			add num-arg 1 to {Kralovstvi_Hrad.%server%}
+			send "&aSkóre bylo zvyseno o &c%num-arg 1%&a a to na: &4%{Kralovstvi_Hrad.%server%}%/200"
+		string-arg 1 is "remove":
+			add (num-arg 1* -1) to {Kralovstvi_Hrad.%server%}
+			send "&aSkóre bylo snizeno o &c%(num-arg 1* -1)%&a a to na: &4%{Kralovstvi_Hrad.%server%}%/200"
+		string-arg 1 is "reset":
+			set {Kralovstvi_Hrad.%server%} to 0
+			set {Kralovstvi_Hrad_ohen1} to 0
+			set {Kralovstvi_Hrad_ohen2} to 0
+			set {Kralovstvi_Hrad_ohen3} to 0
+			set {Kralovstvi_Hrad_ohen4} to 0
+			set {Kralovstvi_Hrad_lokace1} to location at -2888, 74, -543 in world "war"
+			set {Kralovstvi_Hrad_lokace2} to location at -2799, 74, -610 in world "war"
+			set {Kralovstvi_Hrad_lokacebrany1} to location at -2974, 101, -700 in world "war"
+			set {Kralovstvi_Hrad_lokacebrany2} to location at -2974, 101, -702 in world "war"
+			set {Kralovstvi_Hrad_lokacebrany3} to location at -2974, 102, -700 in world "war"
+			set {Kralovstvi_Hrad_lokacebrany4} to location at -2974, 102, -702 in world "war"
+			set {Kralovstvi_Hrad_lokaceportalu1} to location at -2989, 93, -698 in world "war"
+			set {Kralovstvi_Hrad_lokaceportalu2} to location at -2993, 93, -702 in world "war"
+			set {Kralovstvi_Hrad_teleportkralovskyevent} to 0
+			set {Kralovstvi_Hrad_lokacekralovstvi} to location at -2943, 113, -689 in world "war"
+			set {Kralovstvi_Hrad_lokacehospoda} to location at -2708, 79, -702 in world "war"
+			set {Kralovstvi_Hrad_lokaceportal} to location at -801, 81, 381 in world "world"
+			set {Kralovstvi_Hrad_lokaceknihovny1} to location at -2899, 115, -736 in world "war"
+			set {Kralovstvi_Hrad_lokaceknihovny2} to location at -2895, 115, -740 in world "war"
+			set {Kralovstvi_Hrad_lokaceknihovny3} to location at -2898.5, 102, -808.5 in world "war"
+			set {Kralovstvi_Hrad_lokaceknihovny4} to location at -2901, 102, -808 in world "war"
+			set {Kralovstvi_Hrad_lokaceknihovny5} to location at -2897, 102, -806 in world "war"
+			set {Kralovstvi_Hrad_lokaceknihovny6} to location at -2896.5, 115, -735.5 in world "war"
+			set {Kralovstvi_Hrad_vstupdolokace1} to location at -798, 81, 380 in world "world"
+			set {Kralovstvi_Hrad_vstupdolokace2} to location at -805, 81, 377 in world "world"
+			set {Kralovstvi_Hrad_vstupdolokace3} to location at -2707, 81, -680 in world "war"
+			set {Kralovstvi_Hrad_vstupdolokace4} to location at -2705, 81, -683 in world "war"
+			set {Kralovstvi_Hrad_vstupdolokace5} to location at -2703, 81, -677 in world "war"
+			set {Kralovstvi_Hrad_vstupdolokace6} to location at -802, 81, 381 in world "world"
+			wait 1 second
+			send "&4&lResetovano na puvodni hodnoty!" to all players
+			wait 1 second
+			send "%{Kralovstvi_Hrad.%server%}% %{Kralovstvi_Hrad_ohen1}% %{Kralovstvi_Hrad_ohen2}% %{Kralovstvi_Hrad_ohen3}% %{Kralovstvi_Hrad_ohen4}% %{Kralovstvi_Hrad_lokacebrany1}% %{Kralovstvi_Hrad_lokacebrany2}% %{Kralovstvi_Hrad_lokacebrany3}% %{Kralovstvi_Hrad_lokacebrany4}% %{Kralovstvi_Hrad_lokaceportalu1}% %{Kralovstvi_Hrad_lokaceportalu2}% %{Kralovstvi_Hrad_lokaceportalu3}% %{Kralovstvi_Hrad_teleportkralovskyevent}% %{Kralovstvi_Hrad_lokaceknihovny1}% %{Kralovstvi_Hrad_lokaceknihovny2}% %{Kralovstvi_Hrad_lokaceknihovny3}% %{Kralovstvi_Hrad_lokaceknihovny4}% %{Kralovstvi_Hrad_lokaceknihovny5}% %{Kralovstvi_Hrad_lokaceknihovny6}%" to all players
+# ===============================================================================================
+# ======================================== ZVUKY LOKACE =========================================
+# ===============================================================================================
+every 69 seconds:
+	play raw resourcepack sound "strasidelna" to all players at {Kralovstvi_Hrad_lokacebrany1} volume 10
+every 58 seconds:
+	play raw resourcepack sound "hospoda2" to all players at {Kralovstvi_Hrad_lokacehospoda} volume 1
+	wait 29 seconds
+	play raw resourcepack sound "hospoda2" to all players at {Kralovstvi_Hrad_lokacehospoda} volume 1
+every 30 seconds: 
+	play raw resourcepack sound "temnyles" to all players at {Kralovstvi_Hrad_lokaceportal} volume 7
+# ===============================================================================================
+# ========================================== KOVADLINA ==========================================
+# ===============================================================================================
+command /kralovstvihradkovadlina358 [<text>]:	
+#	permission: admin.permission
+	trigger:
+		if arg-1 is "Drahokam ohne":
+			set {KralovstviHrad_kovadlina_ohen} to tool of player
+			stop
+	
+		if arg-1 is "Drahokam vzduchu":
+			set {KralovstviHrad_kovadlina_vzduch} to tool of player
+			stop
+	
+		if arg-1 is "Drahokam zeme":
+			set {KralovstviHrad_kovadlina_zem} to tool of player
+			stop
+			
+		if arg-1 is "Drahokam vody":
+			set {KralovstviHrad_kovadlina_voda} to tool of player
+			stop
+			
+		if arg-1 is "Drahokam duse":
+			set {KralovstviHrad_kovadlina_duse} to tool of player
+			stop
+
+		if arg-1 is "Ulomek duse":
+			set {KralovstviHrad_kovadlina_ulomek} to tool of player
+			stop
+#		send "%{KralovstviHrad_kovadlina_slot}%" to all players
+		open chest with 7 rows named "&3Temny oltar" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&3Temny oltar":
+			stop
+		set {KralovstviHrad_kovadlina_slot} to 0
+		loop 4 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+		format gui slot 4 of player with DIAMOND_HOE:192 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Kladivko pro vylepseni drahokamu duse" to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 5
+		loop 6 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 11 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 12
+		loop 3 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 15 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 16
+		loop 6 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 22 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 23
+		loop 5 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 28 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 29 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+#		format gui slot 30 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+#		format gui slot 31 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+#		format gui slot 32 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 33 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+#		format gui slot 34 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 35
+		loop 5 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 40 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 41
+		loop 6 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 47 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 48
+		loop 3 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+#		format gui slot 51 of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		set {KralovstviHrad_kovadlina_slot} to 52
+		loop 11 times:
+			format gui slot {KralovstviHrad_kovadlina_slot} of player with DIAMOND_HOE:187 with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_kovadlina_slot}
+
+# ========================================== SPOJENI ITEMU ==========================================
+
+on inventory click:
+	if inventory name of current inventory of player contains "&3Temny oltar":
+		wait 4 tick
+		if slot 19 of current inventory of player is DIAMOND_HOE:
+			if name of slot 11 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse11} to "j"
+				if lore of slot 11 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot11.%player%.KralovstviHrad.kovadlina} to slot 11 of current inventory of player
+
+			if name of slot 15 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse15} to "j"
+				if lore of slot 15 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot15.%player%.KralovstviHrad.kovadlina} to slot 15 of current inventory of player
+
+			if name of slot 28 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse28} to "j"
+				if lore of slot 28 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot28.%player%.KralovstviHrad.kovadlina} to slot 28 of current inventory of player
+
+			if name of slot 34 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse34} to "j"
+				if lore of slot 34 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot34.%player%.KralovstviHrad.kovadlina} to slot 34 of current inventory of player
+
+			if name of slot 47 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse47} to "j"
+				if lore of slot 47 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot47.%player%.KralovstviHrad.kovadlina} to slot 47 of current inventory of player
+
+			if name of slot 51 of current inventory of player contain "&dUlomek duse":
+				set {_ulomekduse51} to "j"
+				if lore of slot 51 of current inventory of player does not contain "&dEpicke":
+					stop
+				set {ega_slot51.%player%.KralovstviHrad.kovadlina} to slot 51 of current inventory of player
+
+			if name of slot 31 of current inventory of player contain "&6Drahokam duse":
+				set {_drahokam31} to "j"
+				if lore of slot 31 of current inventory of player does not contain "&6Legendarni":
+					stop					
+				set {ega_slot31.%player%.KralovstviHrad.kovadlina} to slot 31 of current inventory of player
+
+			if name of slot 22 of current inventory of player contain "&6Drahokam ohne":
+				set {_drahokam22} to "1"
+				set {ega_slot22.%player%.KralovstviHrad.kovadlina} to slot 22 of current inventory of player
+
+			if name of slot 22 of current inventory of player contain "&6Drahokam vody":
+				set {_drahokam22} to "2"
+				set {ega_slot22.%player%.KralovstviHrad.kovadlina} to slot 22 of current inventory of player
+
+			if name of slot 22 of current inventory of player contain "&6Drahokam vzduchu":
+				set {_drahokam22} to "3"
+				set {ega_slot22.%player%.KralovstviHrad.kovadlina} to slot 22 of current inventory of player
+
+			if name of slot 22 of current inventory of player contain "&6Drahokam zem":
+				set {_drahokam22} to "4"
+				set {ega_slot22.%player%.KralovstviHrad.kovadlina} to slot 22 of current inventory of player
+
+			if name of slot 30 of current inventory of player contain "&6Drahokam ohne":
+				set {_drahokam30} to "1"
+				set {ega_slot30.%player%.KralovstviHrad.kovadlina} to slot 30 of current inventory of player
+
+			if name of slot 30 of current inventory of player contain "&6Drahokam vody":
+				set {_drahokam30} to "2"
+				set {ega_slot30.%player%.KralovstviHrad.kovadlina} to slot 30 of current inventory of player
+
+			if name of slot 30 of current inventory of player contain "&6Drahokam vzduchu":
+				set {_drahokam30} to "3"
+				set {ega_slot30.%player%.KralovstviHrad.kovadlina} to slot 30 of current inventory of player
+
+			if name of slot 30 of current inventory of player contain "&6Drahokam zem":
+				set {_drahokam30} to "4"
+				set {ega_slot30.%player%.KralovstviHrad.kovadlina} to slot 30 of current inventory of player
+
+			if name of slot 32 of current inventory of player contain "&6Drahokam ohne":
+				set {_drahokam32} to "1"
+				set {ega_slot32.%player%.KralovstviHrad.kovadlina} to slot 32 of current inventory of player
+
+			if name of slot 32 of current inventory of player contain "&6Drahokam vody":
+				set {_drahokam32} to "2"
+				set {ega_slot32.%player%.KralovstviHrad.kovadlina} to slot 32 of current inventory of player
+
+			if name of slot 32 of current inventory of player contain "&6Drahokam vzduchu":
+				set {_drahokam32} to "3"
+				set {ega_slot32.%player%.KralovstviHrad.kovadlina} to slot 32 of current inventory of player
+
+			if name of slot 32 of current inventory of player contain "&6Drahokam zem":
+				set {_drahokam32} to "4"
+				set {ega_slot32.%player%.KralovstviHrad.kovadlina} to slot 32 of current inventory of player
+
+			if name of slot 40 of current inventory of player contain "&6Drahokam ohne":
+				set {_drahokam40} to "1"
+				set {ega_slot40.%player%.KralovstviHrad.kovadlina} to slot 40 of current inventory of player
+
+			if name of slot 40 of current inventory of player contain "&6Drahokam vody":
+				set {_drahokam40} to "2"
+				set {ega_slot40.%player%.KralovstviHrad.kovadlina} to slot 40 of current inventory of player
+
+			if name of slot 40 of current inventory of player contain "&6Drahokam vzduchu":
+				set {_drahokam40} to "3"
+				set {ega_slot40.%player%.KralovstviHrad.kovadlina} to slot 40 of current inventory of player
+
+			if name of slot 40 of current inventory of player contain "&6Drahokam zem":
+				set {_drahokam40} to "4"
+				set {ega_slot40.%player%.KralovstviHrad.kovadlina} to slot 40 of current inventory of player
+
+		if clicked slot is 4:
+			if slot 11 or 15 or 22 or 28 or 30 or 31 or 32 or 34 or 40 or 47 or 51 of current inventory of player is air:
+				stop
+			else:
+				if {_drahokam22} = {_drahokam30}:
+					if {_drahokam32} = {_drahokam40}:
+						if {_ulomekduse11} = "j":
+							if {_ulomekduse15} = "j":
+								if {_ulomekduse28} = "j":
+									if {_ulomekduse34} = "j":
+										if {_ulomekduse47} = "j":
+											if {_ulomekduse51} = "j":
+												send "%{_ulomekduse51}%" to all players
+												if {_drahokam31} = "j":
+													if {_drahokam22} = "1":
+														if {_drahokam30} = "1":	
+															if {_drahokam32} = "1":											
+																if {_drahokam40} = "1":
+																	set {KralovstviHrad_item} to "Ma okolo sebe auru drahokamu ohne."
+																	send "%{KralovstviHrad_item}%" to all players
+																	set {_vsechnydrahokamy} to "j"
+
+
+													if {_drahokam22} = "2":
+														if {_drahokam30} = "2":	
+															if {_drahokam32} = "2":	
+																if {_drahokam40} = "2":	
+																	set {KralovstviHrad_item} to "Ma okolo sebe auru drahokamu vody."
+																	send "%{KralovstviHrad_item}%" to all players
+																	set {_vsechnydrahokamy} to "j"
+	
+													if {_drahokam22} = "3":
+														if {_drahokam30} = "3":	
+															if {_drahokam32} = "3":	
+																if {_drahokam40} = "3":	
+																	set {KralovstviHrad_item} to "Ma okolo sebe auru drahokamu vzduchu."
+																	send "%{KralovstviHrad_item}%" to all players
+																	set {_vsechnydrahokamy} to "j"
+
+													if {_drahokam22} = "4":
+														if {_drahokam30} = "4":	
+															if {_drahokam32} = "4":	
+																if {_drahokam40} = "4":
+																	set {KralovstviHrad_item} to "Ma okolo sebe auru drahokamu zeme."
+																	send "%{KralovstviHrad_item}%" to all players
+																	set {_vsechnydrahokamy} to "j"
+
+						if {_vsechnydrahokamy} = "j":	
+							if player has enough space for 1 diamond_hoe:42 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Vylepseny drahokam duse" with lore "&fZivelny kamen    &6Legendarni||&7Tento kamen ti umozni||&7vylepsovat magicke predmety||&7v temntem oltari||&dPri vylepsovani zbrane:||&7- meni &3podstatu zbrane||&c%{KralovstviHrad_item}%||&6Legendarni||":
+								give player 1 diamond_hoe:42 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Vylepseny drahokam duse" with lore "&fZivelny kamen    &6Legendarni||&7Tento kamen ti umozni||&7vylepsovat magicke predmety||&7v temntem oltari||&dPri vylepsovani zbrane:||&7- meni &3podstatu zbrane||&c%{KralovstviHrad_item}%||&6Legendarni||"
+							else:
+								drop 1 diamond_hoe:42 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Vylepseny drahokam duse" with lore "&fZivelny kamen    &6Legendarni||&7Tento kamen ti umozni||&7vylepsovat magicke predmety||&7v temntem oltari||&dPri vylepsovani zbrane:||&7- meni &3podstatu zbrane||&c%{KralovstviHrad_item}%||&6Legendarni||" at location of player
+#							send "%{_drahokam32}%" to all players
+#							give player 1 diamond_hoe:42 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Vylepseny drahokam duse" with lore "&fZivelny kamen    &6Legendarni||&7Tento kamen ti umozni||&7vylepsovat magicke predmety||&7v temntem oltari||&dPri vylepsovani zbrane:||&7- meni &3podstatu zbrane||&c%{KralovstviHrad_item}%||&6Legendarni||"
+#							set {_cas} to now
+#							set {_world} to world of player
+#							wf "[%IP of player%] [%{_cas}% (%player's x-coordinate% %player's y-coordinate% %player's z-coordinate% %{_world}%)] Chimersky kovar: %player% vylepsil zbroj %{ega_slot19.%player%.asylum.kovadlina}% na predmet %{_vysledek}%" to "Epeslogger/Hraci/%player%.yml"
+#							wf "[%IP of player%] [%{_cas}% (%player's x-coordinate% %player's y-coordinate% %player's z-coordinate% %{_world}%)] Chimersky kovar: %player% vylepsil zbroj %{ega_slot19.%player%.asylum.kovadlina}% na predmet %{_vysledek}%" to "A_epesni_centrala/Vylepsovani_predmetu.yml"
+				
+							format gui slot 11 of player with air
+							format gui slot 22 of player with air
+							format gui slot 28 of player with air
+							format gui slot 30 of player with air
+							format gui slot 31 of player with air
+							format gui slot 32 of player with air
+							format gui slot 34 of player with air
+							format gui slot 40 of player with air
+							format gui slot 47 of player with air
+							format gui slot 51 of player with air
+							
+							delete {ega_slot11.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot15.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot22.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot28.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot30.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot31.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot32.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot34.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot40.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot47.%player%.KralovstviHrad.kovadlina}
+							delete {ega_slot51.%player%.KralovstviHrad.kovadlina}
+					
+							wait 2 ticks
+							close player's inventory
+# ========================================== ZAVRENI KOVADLINY + VRACENI ITEMU ==========================================
+on inventory close:
+	if inventory name of current inventory of player contains "&3Temny oltar":
+		if slot 11 of current inventory of player is not air:
+			set {ega_slot15.%player%.KralovstviHrad.kovadlina} to slot 15 of current inventory of player
+			if player has enough space for {ega_slot15.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot15.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot15.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 22 of current inventory of player is not air:
+			set {ega_slot22.%player%.KralovstviHrad.kovadlina} to slot 22 of current inventory of player
+			if player has enough space for {ega_slot22.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot22.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot22.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 28 of current inventory of player is not air:
+			set {ega_slot28.%player%.KralovstviHrad.kovadlina} to slot 28 of current inventory of player
+			if player has enough space for {ega_slot28.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot28.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot28.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 30 of current inventory of player is not air:
+			set {ega_slot30.%player%.KralovstviHrad.kovadlina} to slot 30 of current inventory of player
+			if player has enough space for {ega_slot30.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot30.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot30.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 31 of current inventory of player is not air:
+			set {ega_slot31.%player%.KralovstviHrad.kovadlina} to slot 31 of current inventory of player
+			if player has enough space for {ega_slot31.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot31.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot31.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 32 of current inventory of player is not air:
+			set {ega_slot32.%player%.KralovstviHrad.kovadlina} to slot 32 of current inventory of player
+			if player has enough space for {ega_slot32.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot32.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot32.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 34 of current inventory of player is not air:
+			set {ega_slot34.%player%.KralovstviHrad.kovadlina} to slot 34 of current inventory of player
+			if player has enough space for {ega_slot34.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot34.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot34.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 40 of current inventory of player is not air:
+			set {ega_slot40.%player%.KralovstviHrad.kovadlina} to slot 40 of current inventory of player
+			if player has enough space for {ega_slot40.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot40.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot40.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 47 of current inventory of player is not air:
+			set {ega_slot47.%player%.KralovstviHrad.kovadlina} to slot 47 of current inventory of player
+			if player has enough space for {ega_slot47.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot47.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot47.%player%.KralovstviHrad.kovadlina} at location of player
+
+		if slot 51 of current inventory of player is not air:
+			set {ega_slot51.%player%.KralovstviHrad.kovadlina} to slot 51 of current inventory of player
+			if player has enough space for {ega_slot51.%player%.KralovstviHrad.kovadlina}:
+				give {ega_slot51.%player%.KralovstviHrad.kovadlina} to player
+			else:
+				drop {ega_slot51.%player%.KralovstviHrad.kovadlina} at location of player
+		wait 2 seconds
+		delete {ega_slot11.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot15.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot22.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot28.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot30.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot31.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot32.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot34.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot40.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot47.%player%.KralovstviHrad.kovadlina}
+		delete {ega_slot51.%player%.KralovstviHrad.kovadlina}
+# ===============================================================================================
+# ========================================== HOSPODSKY ==========================================
+# ===============================================================================================
+on npc right click:
+	if citizen is 1095:
+		open chest with 1 rows named "&eHostinsky" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&eHostinsky":
+			stop
+		format gui slot 0 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 1 of player with diamond_hoe:418 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Pivecko" with lore "&8Neni nad poradne||&8vychlazene pivecko||&8po poradne drine.||&cCena: 200$" to do nothing
+		format gui slot 2 of player with bread with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Chleba" with lore "&8Obycejny chleba.||&8Vhodny na nasyceni||&8spravneho bojovnika.||&cCena: 250$||&cKusu: 5" to do nothing
+		format gui slot 3 of player with steaks with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hovezi masicko" with lore "&8Prvotridni kvalita,||&8nasyti dokonce i||&8Krale kralu.||&cCena: 600$||&cKusu: 3" to do nothing
+		format gui slot 4 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 5 of player with diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&8Vino vhodne do sbirky.||&8Absolutne se neslusi||&8aby ho nekdo pil.||&cCena: 20000$" to do nothing
+		format gui slot 6 of player with baked potato with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Velka pecena brambora" with lore "&8Peceno v alobalu||&8na otevrenem ohni.||&8Stale je tepla.||&cCena: 200$" to do nothing
+		format gui slot 7 of player with rabbit stew with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Kralici polevka" with lore "&8Polivecka, na zahrati||&8prazdneho zaludku||&8idealni.||&cCena: 300$" to do nothing
+		format gui slot 8 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+on inventory click:
+	if inventory name of current inventory of player contains "&eHostinsky":
+		if clicked slot is 1:
+			if player's balance is more than 200:
+				set {KralovstviHrad_hostinsky_koupeno} to "Pivecko"
+				set {KralovstviHrad_hostinsky_cena} to "200"
+				apply blindness to player for 2 minutes
+				apply nausea to player for 2 minutes
+				remove 200 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+		if clicked slot is 2:
+			if player's balance is more than 250:
+				set {KralovstviHrad_hostinsky_koupeno} to "Chleba"
+				set {KralovstviHrad_hostinsky_cena} to "250"
+				if player has enough space for 5 bread named "&6Chleba" with lore "&7Obycejny chleba.||&7Vhodny na nasyceni||&7spravneho bojovnika.":
+					give player 5 bread named "&6Chleba" with lore "&7Obycejny chleba.||&7Vhodny na nasyceni||&7spravneho bojovnika."
+				else:
+					drop 5 bread named "&6Chleba" with lore "&7Obycejny chleba.||&7Vhodny na nasyceni||&7spravneho bojovnika." at location of player
+
+				remove 250 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+		if clicked slot is 3:
+			if player's balance is more than 650:
+				set {KralovstviHrad_hostinsky_koupeno} to "Hovezi masicko"
+				set {KralovstviHrad_hostinsky_cena} to "650"
+				if player has enough space for 3 steaks named "&6Hovezi masicko" with lore "&7Prvotridni kvalita,||&7nasyti dokonce i||&7Krale kralu.":
+					give player 3 steaks named "&6Hovezi masicko" with lore "&7Prvotridni kvalita,||&7nasyti dokonce i||&7Krale kralu."
+				else:
+					drop 3 steaks named "&6Hovezi masicko" with lore "&7Prvotridni kvalita,||&7nasyti dokonce i||&7Krale kralu." at location of player
+
+				remove 650 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+		if clicked slot is 5:
+			if player's balance is more than 20000:
+				set {KralovstviHrad_hostinsky_koupeno} to "Sberatelska lahev vina"
+				set {KralovstviHrad_hostinsky_cena} to "20000"
+				if player has enough space for diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&7Vino vhodne do sbirky.||&7Absolutne se neslusi||&7aby ho nekdo pil.||&bSberatelske":
+					give player diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&7Vino vhodne do sbirky.||&7Absolutne se neslusi||&7aby ho nekdo pil.||&bSberatelske"
+				else:
+					drop diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&7Vino vhodne do sbirky.||&7Absolutne se neslusi||&7aby ho nekdo pil.||&bSberatelske	" at location of player
+
+				remove 20000 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+		if clicked slot is 6:
+			if player's balance is more than 200:
+				set {KralovstviHrad_hostinsky_koupeno} to "Velka pecena brambora"
+				set {KralovstviHrad_hostinsky_cena} to "200"
+				if player has enough space for baked potato with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Velka pecena brambora" with lore "&7Peceno v alobalu||&7na otevrenem ohni.||&7Stale je tepla.":
+					give player baked potato with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Velka pecena brambora" with lore "&7Peceno v alobalu||&7na otevrenem ohni.||&7Stale je tepla."
+				else:
+					drop baked potato with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Velka pecena brambora" with lore "&7Peceno v alobalu||&7na otevrenem ohni.||&7Stale je tepla." at location of player
+
+				remove 200 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+		if clicked slot is 7:
+			if player's balance is more than 300:
+				set {KralovstviHrad_hostinsky_koupeno} to "Kralici polevka"
+				set {KralovstviHrad_hostinsky_cena} to "300"
+				if player has enough space for rabbit stew with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Kralici polevka" with lore "&7Polivecka, na zahrati||&7prazdneho zaludku||&7idealni.":
+					give player rabbit stew with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Kralici polevka" with lore "&7Polivecka, na zahrati||&7prazdneho zaludku||&7idealni."
+				else:
+					drop rabbit stew with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Kralici polevka" with lore "&7Polivecka, na zahrati||&7prazdneho zaludku||&7idealni." at location of player
+
+				remove 300 from player's balance
+				send "&eHostinsky: &7Moc dekuji za nakup." to player
+				send "&cKoupil sis &a%{KralovstviHrad_hostinsky_koupeno}%&c za %{KralovstviHrad_hostinsky_cena}%$." to player
+			else:
+				send "&eHostinsky: &7Nemas dostatek penez." to player
+			wait 2 ticks
+			close player's inventory
+# ===============================================================================================
+# ======================================= HOSPODSKY - vino ======================================
+# ===============================================================================================
+on right click with diamond_hoe:
+	if player is holding diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&7Vino vhodne do sbirky.||&7Absolutne se neslusi||&7aby ho nekdo pil.||&bSberatelske":
+		remove diamond_hoe:421 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Sberatelska lahev vina" with lore "&7Vino vhodne do sbirky.||&7Absolutne se neslusi||&7aby ho nekdo pil.||&bSberatelske" from player's inventory
+		apply blindness to player for 20 minutes
+		apply weakness to player for 20 minutes
+		apply nausea to player for 20 minutes
+#		send "&f[&cSdeleni&f] &c%player% je absolutne neslusny a pije sberatelske vino, ohavnost!" to all players
+		chance of 5%:
+			send "&f[&cSdeleni&f] &cBohuzel %player% uz neni mezi nami zivimi..." to all players
+#			teleport player to location at -2718, 96, -584 in world "war"
+			wait 1 tick
+			kill player
+			play raw resourcepack sound "zbozna" to all players at location of player
+			send "&cA timto tvuj zivot mezi tvymi prateli a jedine co na tebe ceka je peklo." to player
+		else:
+			send "&f[&cSdeleni&f] &c%player% je absolutne neslusny a pije sberatelske vino, ohavnost!" to all players
+# ===============================================================================================
+# ================================= HRNICKY - uvodni tabulka ====================================
+# ===============================================================================================
+on npc right click:
+	if citizen is 1096:
+		open chest with 3 rows named "&eO kolik $ si chces zahrat?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&eO kolik $ si chces zahrat?":
+			stop
+		set {KralovstviHrad_hrnicky_slot} to 0
+		loop 11 times:
+			format gui slot {KralovstviHrad_hrnicky_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_hrnicky_slot}
+		set {KralovstviHrad_hrnicky_slot} to 16
+		format gui slot 11 of player with eye of ender with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces opravdu vsadit 1000$?" with lore "&eTahle akce je nevratna||&esi si opravdu jisty,||&eze chces vsadit 1000$?||&aKliknutim vyberes" to do nothing
+		format gui slot 12 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 13 of player with eye of ender with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces opravdu vsadit 5000$?" with lore "&eTahle akce je nevratna||&esi si opravdu jisty,||&eze chces vsadit 5000$?||&aKliknutim vyberes" to do nothing
+		format gui slot 14 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 15 of player with eye of ender with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces opravdu vsadit 10000$?" with lore "&eTahle akce je nevratna||&esi si opravdu jisty,||&eze chces vsadit 10000$?||&aKliknutim vyberes" to do nothing
+		loop 11 times:
+			format gui slot {KralovstviHrad_hrnicky_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {KralovstviHrad_hrnicky_slot}
+# ===============================================================================================
+# ================================ HRNICKY - cena - vybirani ====================================
+# ===============================================================================================
+on inventory click:
+	if inventory name of current inventory of player contains "&eO kolik $ si chces zahrat?":
+		set {KralovstviHrad_hrnicky_randomtoceni} to "0"
+		set {KralovstviHrad_hrnicky_odmena.%player%} to "0"
+		set {KralovstviHrad_hrnicky_random.%player%} to "0"
+		set {KralovstviHrad_hrnicky2_slot} to "0"
+		if clicked slot is 11:
+			if player's balance is more than 1000:
+				set {KralovstviHrad_hrnicky_random.%player%} to "1000"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is 13:
+			if player's balance is more than 5000:
+				set {KralovstviHrad_hrnicky_random.%player%} to "5000"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is 15:
+			if player's balance is more than 10000:
+				set {KralovstviHrad_hrnicky_random.%player%} to "10000"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is not 11 or 13 or 15:
+			stop
+		if {KralovstviHrad_hrnicky_random.%player%} is "1000" or "5000" or "10000":
+			loop 3 times:
+				set {KralovstviHrad_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+				if {KralovstviHrad_hrnicky_randomtoceni} is "1":
+					open chest with 6 rows named "&aHrnicky o $:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o $:":
+						stop
+					set {KralovstviHrad_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 29 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+				if {KralovstviHrad_hrnicky_randomtoceni} is "2":
+					open chest with 6 rows named "&aHrnicky o $:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o $:":
+						stop
+					set {KralovstviHrad_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+				if {KralovstviHrad_hrnicky_randomtoceni} is "3":
+					open chest with 6 rows named "&aHrnicky o $:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o $:":
+						stop
+					set {KralovstviHrad_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+					format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					set {KralovstviHrad_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {KralovstviHrad_hrnicky2_slot}
+				wait 1 second
+				open chest with 6 rows named "&aHrnicky o $:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o $:":
+					stop
+				set {KralovstviHrad_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 20 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 29 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				wait 1 second
+
+				open chest with 6 rows named "&bVyber si hrnicek" to player
+				if inventory name of current inventory of player is not "&bVyber si hrnicek":
+					stop
+				set {KralovstviHrad_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 20 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 29 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+# ===============================================================================================
+# ================================ HRNICKY - cena - vybirani ====================================
+# ===============================================================================================
+on inventory click:
+	if inventory name of current inventory of player contains "&bVyber si hrnicek":
+		if clicked slot is 29:
+			set {KralovstviHrad_hrnicky_odmena.%player%} to "1"
+
+		if clicked slot is 31:
+			set {KralovstviHrad_hrnicky_odmena.%player%} to "2"
+
+		if clicked slot is 33:
+			set {KralovstviHrad_hrnicky_odmena.%player%} to "3"
+
+		if clicked slot is not 29 or 31 or 33:
+			stop
+		if {KralovstviHrad_hrnicky_odmena.%player%} is "1" or "2" or "3":
+			set {KralovstviHrad_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+
+			if {KralovstviHrad_hrnicky.server} > 0:
+				if {KralovstviHrad_hrnicky_randomtoceni} = {KralovstviHrad_hrnicky_odmena.%player%}:
+					set {KralovstviHrad_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+					if {KralovstviHrad_hrnicky_randomtoceni} = {KralovstviHrad_hrnicky_odmena.%player%}:
+						set {KralovstviHrad_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+						if {KralovstviHrad_hrnicky_randomtoceni} = {KralovstviHrad_hrnicky_odmena.%player%}:
+							set {KralovstviHrad_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+
+			if {KralovstviHrad_hrnicky_randomtoceni} is "1":
+				open chest with 6 rows named "&aHrnicky o $:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o $:":
+					stop
+				set {KralovstviHrad_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 29 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+			if {KralovstviHrad_hrnicky_randomtoceni} is "2":
+				open chest with 6 rows named "&aHrnicky o $:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o $:":
+					stop
+				set {KralovstviHrad_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+			if {KralovstviHrad_hrnicky_randomtoceni} is "3":
+				open chest with 6 rows named "&aHrnicky o $:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o $:":
+					stop
+				set {KralovstviHrad_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 20 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with dark oak log with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Hrnicek" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+				format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+				set {KralovstviHrad_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {KralovstviHrad_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {KralovstviHrad_hrnicky2_slot}
+			if {KralovstviHrad_hrnicky_odmena.%player%} = {KralovstviHrad_hrnicky_randomtoceni}:
+				command "/eco give %player% %{KralovstviHrad_hrnicky_random.%player%}%"
+				add 1 to {KralovstviHrad_hrnicky.server}
+				send "&bObral si Frantu o penize." to player
+				Chance of 1%:
+					if player has enough space for fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Kdysi davno patrila||&7znamemu ojebavaci Frantovi.||&bSberatelske":
+						give player fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka||&7Kdysi davno patrila||&7znamemu ojebavaci Frantovi.||&bSberatelske"
+					else:
+						drop fire charge with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka||&7Kdysi davno patrila||&7znamemu ojebavaci Frantovi.||&bSberatelske" at location of player
+
+			else:
+				command "/eco take %player% %{KralovstviHrad_hrnicky_random.%player%}%"
+				send "&cVybral sis spatne" to player
+				add -1 to {KralovstviHrad_hrnicky.server}
+# ===============================================================================================
+# ================================ HRNICKY - ojebani hracu ======================================
+# ===============================================================================================
+command /xddddd:
+	permission: Kralovstvi_Hrad.admin
+	permission message: &c&l[HRAD]&7&lYou do not have permission.
+	executable by: player and console
+	trigger:
+		send "%{KralovstviHrad_hrnicky.server}%" to player

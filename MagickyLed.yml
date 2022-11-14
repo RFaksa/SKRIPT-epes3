@@ -1,0 +1,35 @@
+MagickyLed:
+  Type: silverfish
+  Display: ''
+  Health: 300
+  Damage: 0
+  AIGoalSelectors:
+  - 0 clear
+  - 1 clear
+  AITargetSelectors:
+  - 0 clear
+  - 1 clear
+  Equipment:
+  - Rampouchy:4
+  Disguise:
+    Type: Zombie
+    Invisible: true
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 1
+    FollowRange: 1
+    MovementSpeed: 0.01
+    MaxCombatDistance: 1
+    Despawn: true
+    Silent: true
+    Collidable: false
+    Persistent: false
+    NoAI: true
+  Skills:
+  - setgravity{g=false} @self ~onSpawn
+  - skill {s=MagickyLedSkill} @self ~onSpawn

@@ -1,0 +1,88 @@
+command /AurenDokonceniQuestuLevel <player> [<number>]:
+	permission: prehled.admin
+	executable by: player and console
+	trigger:
+		set {_lvl} to "%({rpglvl_.::%arg-1%}*0.1*arg-2)%"
+		execute console command "battlelevels addscore %arg-1% %{_lvl}%"
+		send "&eZiskal si %{_lvl}% zkusenosti." to arg-1
+
+on player fishing:
+	set {_regions} to "%regions at player%"
+	if {_regions} contain "aurenhovno1":
+		if player doesn't have permission "auren.hovno1":
+			stop
+		if "%fishing state%" is "CAUGHT_FISH":
+			chance of 1%:
+				clear caught item
+				execute console command "/mm i give %player% AurenQuestOdpadky"
+				send "&aPodarilo se ti vylovit pytel!"
+				execute console command "/pex user %player% remove auren.hovno1"
+				stop
+	if {_regions} contain "aurenhovno2":
+		if player doesn't have permission "auren.hovno2":
+			stop
+		if "%fishing state%" is "CAUGHT_FISH":
+			chance of 1%:
+				clear caught item
+				execute console command "/mm i give %player% AurenQuestOdpadky"
+				send "&aPodarilo se ti vylovit pytel!"
+				execute console command "/pex user %player% remove auren.hovno2"
+				stop
+	if {_regions} contain "aurenhovno3":
+		if player doesn't have permission "auren.hovno3":
+			stop
+		if "%fishing state%" is "CAUGHT_FISH":
+			chance of 1%:
+				clear caught item
+				execute console command "/mm i give %player% AurenQuestOdpadky"
+				send "&aPodarilo se ti vylovit pytel!"
+				execute console command "/pex user %player% remove auren.hovno3"
+				stop
+
+
+on mythicmob deathevent:
+	if mobtype of activemob event-activemob is "QuestUtikajiciObchodnik":
+		loop all players:
+			if loop-player has permission "auren.utikajiciobchodnik":
+				execute console command "/mm i give %loop-player% AurenQuestPytel2"
+				execute console command "/pex user %loop-player% remove auren.utikajiciobchodnik"
+on logout:
+	if player has permission "auren.utikajiciobchodnik":
+		if player is a op:
+			stop
+		else:
+			execute console command "/Questadmin quit %player% Bezna Rutina"
+			execute console command "/pex user %player% remove auren.utikajiciobchodnik"
+			execute console command "/mail send %player% &4&lVetesnik: &eHahahaha utekl jsem ti :P"
+
+on death: 
+	set {_regions} to "%regions at player%"
+	if {_regions} contain "MumieR" or "SamanR" or "AurenWB":
+		clear effects of player
+		make player run command "/undisguise" as op
+	if {_regions} contain "dropper1":
+		force player to respawn
+		execute console command "/tppos %player% -2569.5 227 2188.5 war 0"
+	if {_regions} contain "dropper2":
+		force player to respawn
+		execute console command "/tppos %player% -2548.5 233 2194.5 war 0"
+	if {_regions} contain "dropper3":
+		force player to respawn
+		execute console command "/tppos %player% -2491.5 237 2252.5 war 0"
+	if {_regions} contain "dropper4":
+		force player to respawn
+		execute console command "/tppos %player% -2574.5 241 2258.5 war 0"
+	if {_regions} contain "dropper5":
+		force player to respawn
+		execute console command "/tppos %player% -2557.5 216 2332.5 war 0"
+on first login:
+	if {rpglvl_.::%player%} is set:
+		execute console command "/mail send TheDarkLord173 &5%player% &dnebyl nastaven level na 0"
+		stop
+	execute console command "/mail send TheDarkLord173 &2%player% &abyl nastaven level na 0"
+	execute console command "/setlevel %player% 0"
+#on heal:
+#	if event-player has permission "vampir.obycejny" or "vampire.mode.bloodlust": 
+#		cancel event
+#		set {_heal} from heal amount
+#		heal player by {_heal} * 0.5 /2 hearts

@@ -1,0 +1,44 @@
+Carodej:
+  Type: zombie
+  Display: 'Carodej'
+  Health: 150
+  Damage: 50
+#  AIGoalSelectors:
+#  - 0 clear
+#  - 1 clear
+#  AITargetSelectors:
+#  - 0 clear
+#  - 1 clear
+  Disguise:
+    Type: player
+    Skin: 'indian'
+    Player: Carodej
+    Invisible: false
+  Equipment:
+  BossBar:
+    Enabled: true
+    Title: '&f&l<&7&l<&8&l<&0Carodej&8&l>&7&l>&f&l>'
+    Range: 5
+    Color: RED
+    Style: NORMAL
+  KillMessages:
+    - '&4<target.name> &cbyl zabit carodejem.'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.3
+    FollowRange: 15
+    MovementSpeed: 0.28
+    NoDamageTicks: 100
+    Despawn: true
+    Silent: true
+    Collidable: false
+    Persistent: false
+    NoAI: false
+    MaxCombatDistance: 15
+  Skills:
+  - skill{s=CarodejPotionHod} @target ~onDamaged =100
