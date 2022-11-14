@@ -1,0 +1,395 @@
+on shoot:
+	if shooter is ender dragon:
+#		if shooter's name is "Mlade ledoveho draka" or "Mlade ohniveho draka" or "Drakohnivymlade":
+		cancel event
+		stop
+on join:
+	set {rodybobulecooldown.%player%} to 0
+	set {MagickaDzinovaLampa.%player%} to 0
+on right click with diamond_hoe:
+	if player is holding diamond_hoe named "bobule":
+		if {rodybobulecooldown.%player%} is 1:
+			send "&cPri nedavne zkusenosti s temito bobulemi te nejak presla chut."
+			stop
+		set {rodybobulecooldown.%player%} to "1" parsed as number
+		send player title "" with subtitle "&5Snedl si jedovate bobule" for 3 seconds
+		chance of 50%:
+			remove diamond_hoe named "bobule" from player's inventory
+		chance of 5%:
+			apply blindness to player for 1 minute
+			apply weakness to player for 1 minute
+			apply nausea to player for 1 minute
+			stop
+		send "pokracuji" to all players
+		wait 3 seconds
+		kill player
+		wait 12 seconds
+		set {rodybobulecooldown.%player%} to "0" parsed as number
+
+on right click with diamond_hoe:
+	if player is holding diamond_hoe named "Magicka dzonyho lampa":
+		if {MagickaDzinovaLampa.%player%} is 1:
+			send "&cNedavno si vyuzil lampu magickeho Dzina" to player
+			stop
+		set {MagickaDzinovaLampa.%player%} to 1
+		set {MagickaDzinovaLampaEfekt.%player%} to random element of "blindness", "nausea", "speed", "slowness", "haste", "mining_fatigue", "wither", "water_breathing", "absorption", "invisibility", "regeneration", "jump_boost", "resistance", "night_vision", "poison" parsed as text
+		send "%{MagickaDzinovaLampaEfekt.%player%}%" to all players
+		make player execute command "/effect %player% %{MagickaDzinovaLampaEfekt.%player%}% 180 0"
+		wait 3 minutes
+		set {MagickaDzinovaLampa.%player%} to 0
+
+
+
+#every 5 seconds:
+#	if player is wearing an diamond helmet:
+#		hide player from all players
+#		send "1" to all players
+
+
+
+
+
+
+
+
+
+
+
+
+
+on load:
+	set {Kralovstvi_Hrad_lokaceblokace} to location at -2542, 255, -901 in world "war"
+	set {Kralovstvi_Hrad_lokaceblokace2} to location at -3292, 0, -490 in world "war"
+	set {rodylokaceblokace} to location at 3000000, 255, 3000000 in world "war"
+	set {rodylokaceblokace2} to location at 3000500, 0, 2999500 in world "war"
+on any movement:
+	if player is "EmberIsolte":
+		if player is within {rodylokaceblokace} to {rodylokaceblokace2}:
+			execute command "ban EmberIsolte nepovoleny vstup do lokace - rody"
+	if player is not "Miner" or "TheDarkLord173" or "klimki_" or "Epes":
+		if player is within {Kralovstvi_Hrad_lokaceblokace} to {Kralovstvi_Hrad_lokaceblokace2}:
+			execute command "ban %player% nepovoleny vstup do lokace - dlord"
+
+
+
+# ===============================================================================================
+# ================================= HRNICKY - uvodni tabulka ====================================
+# ===============================================================================================
+on npc right click:
+	if citizen is 1123:
+		open chest with 3 rows named "&eNechces zkusit sve stesti?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&eNechces zkusit sve stesti?":
+			stop
+		set {Auren_hrnicky_slot} to 0
+		loop 11 times:
+			format gui slot {Auren_hrnicky_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {Auren_hrnicky_slot}
+		set {Auren_hrnicky_slot} to 16
+		format gui slot 11 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces vsadit 1 aurensky zlatak?" with lore "&eTahle akce je nevratna||ys" to do nothing
+		format gui slot 12 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 13 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces vsadit 2 aurenske zlataky?" with lore "&eTahle akce je nevratna||ys" to do nothing
+		format gui slot 14 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+		format gui slot 15 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&5Chces vsadit 3 aurenske zlataky?" with lore "&eTahle akce je nevratna||ys" to do nothing
+		loop 11 times:
+			format gui slot {Auren_hrnicky_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {Auren_hrnicky_slot}
+# ===============================================================================================
+# ================================ HRNICKY - cena - vybirani ====================================
+# ===============================================================================================
+on inventory click:
+	if inventory name of current inventory of player contains "&eNechces zkusit sve stesti?":
+		set {Auren_hrnicky_randomtoceni} to "0"
+		set {Auren_hrnicky_odmena.%player%} to "0"
+		set {Auren_hrnicky_random.%player%} to "0"
+		set {Auren_hrnicky2_slot} to "0"
+		if clicked slot is 11:
+			if {pocetaurenskychzlatekhrace.%player%} is more than 1:
+				set {Auren_hrnicky_random.%player%} to "1"
+				set {Auren_hrnicky_vyhra.%player%} to "2"	
+				command "/aurenskezlataky %player% take %{Auren_hrnicky_random.%player%}%"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is 13:
+			if {pocetaurenskychzlatekhrace.%player%} is more than 2:
+				set {Auren_hrnicky_random.%player%} to "2"
+				set {Auren_hrnicky_vyhra.%player%} to "4"	
+				command "/aurenskezlataky %player% take %{Auren_hrnicky_random.%player%}%"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is 15:
+			if {pocetaurenskychzlatekhrace.%player%} is more than 3:
+				set {Auren_hrnicky_random.%player%} to "3"
+				set {Auren_hrnicky_vyhra.%player%} to "6"	
+				command "/aurenskezlataky %player% take %{Auren_hrnicky_random.%player%}%"
+			else:
+				send "&eNemas dostatecne mnozstvi penez." to player
+				close player's inventory
+				stop
+		if clicked slot is not 11 or 13 or 15:
+			stop
+		if {Auren_hrnicky_random.%player%} is "1" or "2" or "3":
+			loop 3 times:
+				set {Auren_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+				if {Auren_hrnicky_randomtoceni} is "1":
+					open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+						stop
+					set {Auren_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					set {Auren_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 29 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					set {Auren_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+				if {Auren_hrnicky_randomtoceni} is "2":
+					open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+						stop
+					set {Auren_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					set {Auren_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					set {Auren_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+				if {Auren_hrnicky_randomtoceni} is "3":
+					open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+					if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+						stop
+					set {Auren_hrnicky2_slot} to 0
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+					set {Auren_hrnicky2_slot} to 25
+					loop 4 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+					format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					format gui slot 33 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+					set {Auren_hrnicky2_slot} to 34
+					loop 20 times:
+						format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+						add 1 to {Auren_hrnicky2_slot}
+				wait 1 second
+				open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+					stop
+				set {Auren_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 20 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {Auren_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 29 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				set {Auren_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				wait 1 second
+
+				open chest with 6 rows named "&bVyber si skorapku" to player
+				if inventory name of current inventory of player is not "&bVyber si skorapku":
+					stop
+				set {Auren_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 20 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {Auren_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 29 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				set {Auren_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+# ===============================================================================================
+# ================================ HRNICKY - cena - vybirani ====================================
+# ===============================================================================================
+on inventory click:
+	if inventory name of current inventory of player contains "&bVyber si skorapku":
+		if clicked slot is 29:
+			set {Auren_hrnicky_odmena.%player%} to "1"
+
+		if clicked slot is 31:
+			set {Auren_hrnicky_odmena.%player%} to "2"
+
+		if clicked slot is 33:
+			set {Auren_hrnicky_odmena.%player%} to "3"
+
+		if clicked slot is not 29 or 31 or 33:
+			stop
+		if {Auren_hrnicky_odmena.%player%} is "1" or "2" or "3":
+			set {Auren_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+
+			if {Auren_hrnicky.server} > 0:
+				if {Auren_hrnicky_randomtoceni} = {Auren_hrnicky_odmena.%player%}:
+					set {Auren_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+					if {Auren_hrnicky_randomtoceni} = {Auren_hrnicky_odmena.%player%}:
+						set {Auren_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+						if {Auren_hrnicky_randomtoceni} = {Auren_hrnicky_odmena.%player%}:
+							set {Auren_hrnicky_randomtoceni} to "%random element of 1 and 2 and 3%"
+
+			if {Auren_hrnicky_randomtoceni} is "1":
+				open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+					stop
+				set {Auren_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				set {Auren_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 29 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {Auren_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+			if {Auren_hrnicky_randomtoceni} is "2":
+				open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+					stop
+				set {Auren_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				set {Auren_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka.||&7Patri Frantovi.||&bEventove" to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				set {Auren_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+			if {Auren_hrnicky_randomtoceni} is "3":
+				open chest with 6 rows named "&aHrnicky o &6AURENSKE zlataky:" to player
+				if inventory name of current inventory of player is not "&aHrnicky o &6AURENSKE zlataky:":
+					stop
+				set {Auren_hrnicky2_slot} to 0
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 20 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 21 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 22 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				format gui slot 23 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 24 of player with note block with nbt "{Unbreakable:1b,HideFlags:6}" named "&6Skorapka" to do nothing
+				set {Auren_hrnicky2_slot} to 25
+				loop 4 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+				format gui slot 29 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 30 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 31 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 32 of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+				format gui slot 33 of player with stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cSkorapka" with lore "&cAurenska mince.||&7Patri skorapkari.||&bEventove" to do nothing
+				set {Auren_hrnicky2_slot} to 34
+				loop 20 times:
+					format gui slot {Auren_hrnicky2_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+					add 1 to {Auren_hrnicky2_slot}
+			if {Auren_hrnicky_odmena.%player%} = {Auren_hrnicky_randomtoceni}:
+				command "/aurenskezlataky %player% give %{Auren_hrnicky_vyhra.%player%}%"
+				add 1 to {Auren_hrnicky.server}
+				send "&eObral si skorapkare o penize." to player
+#				Chance of 1%:
+#					if player has enough space for stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cMince" with lore "&cAurenska mince.||&7Kdysi davno patrila||&7znamemu skorapkari.||&bSberatelske":
+#						give player stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka||&7Kdysi davno patrila||&7znamemu ojebavaci Frantovi.||&bSberatelske"
+#					else:
+#						drop stone silverfish with nbt "{Unbreakable:1b,HideFlags:6}" named "&cKulicka" with lore "&cVelmi vzacna kulicka||&7Kdysi davno patrila||&7znamemu ojebavaci Frantovi.||&bSberatelske" at location of player
+
+			else:
+				send "&cVybral sis spatne" to player
+				add -1 to {Auren_hrnicky.server}
+# ===============================================================================================
+# ================================ HRNICKY auren - ojebani hracu ================================
+# ===============================================================================================
+command /AurenOjebaniHracu:
+	permission: Auren.admin
+	permission message: &c&l[Auren]&7&lYou do not have permission.
+	executable by: player and console
+	trigger:
+		send "%{Auren_hrnicky.server}%" to player
