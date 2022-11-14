@@ -1,0 +1,593 @@
+options:
+	citizenrunboss: 1251
+	citizenrunboss2: 1262
+	citizenrunboss3: 1263
+	citizenrunboss4: 1264
+	citizenrunboss5: 1180
+	cenaskupinak: 4000
+	cenapotion: 4000
+	cenapotionvampir: 5000
+	cenapotion2: 1000
+	cenapotion2vampir: 500
+	cenapotion3: 500
+	Aurensoloraid1: -1899.5 88 985.5
+	Aurensoloraid2: -1968.5 117 892.5
+	Aurensoloraid3: -1989.5 124 962.5
+	Aurensoloraid4: -1948.5 134 1116.5
+	Aurensoloraid5: -1988.5 129 1081
+	Aurensoloraid6: -1874.5 122 1039.5
+	Aurensoloraidkonec: -1904.5, 104, 879.5
+	Aurensoloraidkonec2: -1904.5 104 879.5
+	Aurensoloraidodmena: -1903.5,104,884.5
+	Aurensoloraidspawn1: -1911.5,88,972.5
+	Aurensoloraidspawn2: -1995.5,117,892.5
+	Aurensoloraidspawn3: -1997.5,123,989.5
+	Aurensoloraidspawn4: -1937.5,134,1102.5
+	Aurensoloraidspawn5: -2004.5,130,1081.5
+	Aurensoloraidspawn6: -1899.5,123,1039.5
+on load:
+	set {Auren_.raidodmenamisto1} to location at -1896, 111, 897 in world "war"
+	set {Auren_.raidodmenamisto2} to location at -1917, 102, 870 in world "war"
+on npc right click:
+	if citizen is {@citizenrunboss}:
+		if {Auren_.pristupkoupeni::%player%} is not set:
+			stop
+		if {Auren_.mesec::%player%} is not set:
+			stop
+		open chest with 1 rows named "&cJe libo si koupit klicek?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&cJe libo si koupit klicek?":
+			stop
+		set {_slot} to 0
+		loop 9 times:
+			format gui slot {_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {_slot}
+		if player has permission "serversigns.use.vladce.hrad":
+			format gui slot 4 of player with diamond_hoe:646 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lKlic k sinim Muquadasu" with lore "&fTento klic ti umozni vstoupit||&fdo prastareho mista plneho||&fnastrah a dobrodruzstvi!||||&eCena: &2%(2*{@cenaskupinak})% smaragdovych minci &a+ &f2x &6Demonicky prach||&7(Demonicky prach musis drzet v ruce!)||||&5Lze vyuzit u dveri do sini!" to do nothing
+		else:
+			format gui slot 4 of player with diamond_hoe:646 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lKlic k sinim Muquadasu" with lore "&fTento klic ti umozni vstoupit||&fdo prastareho mista plneho||&fnastrah a dobrodruzstvi!||||&eCena: &2{@cenaskupinak} smaragdovych minci &a+ &f1x &6Demonicky prach||&7(Demonicky prach musis drzet v ruce!)||||&5Lze vyuzit u dveri do sini!" to do nothing
+on inventory click:
+	if inventory name of current inventory of player contains "&cJe libo si koupit klicek?":
+		if clicked slot is 4:
+			if player has permission "serversigns.use.vladce.hrad":
+				if {Auren_.zlataky::%player%} is less than (2*{@cenaskupinak}):
+					send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+					stop
+			if {Auren_.zlataky::%player%} is more than ({@cenaskupinak}-1):
+				if {Auren_.pristupdodungeonu::%player%} is 1:
+					send "&eJiz mas zakoupeny klic!" to player
+					close player's inventory
+					stop
+				if player is holding melon seeds:
+					if player has permission "serversigns.use.vladce.hrad":
+						if item amount of player's tool is more than 1:
+							remove 2 of player's tool from player's inventory
+						else:
+							send "&6Nemas 2x demonicky prach na zakoupeni raidu!" to player
+							close player's inventory
+							stop
+					else:
+						if lore of player's tool contains "&7vylepsovani a vyrobe":
+							remove 1 of player's tool from player's inventory
+				else:
+					send "&6Nemas demonicky prach na zakoupeni raidu!" to player
+					close player's inventory
+					stop
+				if player has permission "serversigns.use.vladce.hrad":
+					execute console command "/aurenskezlataky %player% take %(2*{@cenaskupinak})%"
+				else:
+					execute console command "/aurenskezlataky %player% take {@cenaskupinak}"
+				broadcast "&e&l[RAID] &c%player% &asi zakoupil klic k sinim Muquadasu!"
+				set {Auren_.pristupdodungeonu::%player%} to 1
+				close player's inventory
+				stop
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+
+command /AurenRaidBoss [<text>]:
+	permission: prehled.admin
+	trigger:
+		if arg-1 is not set:
+			stop
+		if arg-1 is "vstup":
+			if difference between {Auren_.raidhracodportcas} and now is less than 2 minutes:
+				send "&e&l[RAID] &ePockej nez si jiny bojovnik vybere odmenu!" to player
+				stop
+			if {Auren_.raid} is 1:
+				send "&e&l[RAID] &eMomentalne je raid obsazen jinym bojovnikem!" to player
+				stop
+			if difference between {time::%player%} and now is less than 1 minutes:
+				send "&e&l[RAID] &eNedávno si raid prosel, pockej chvili nez to zkusis znovu!" to player
+				stop	
+			if {Auren_.pristupdodungeonu::%player%} is 1:
+				broadcast "&e&l[RAID] &c%player% &avstoupil do bajnych sini Muquadasu!"
+				set {Auren_.raid.hrac} to "%player%" parsed as player
+				set {Auren_.pristupdodungeonu::%player%} to 2
+				set {time::%player%} to now
+				add 1 to {Auren_.raid.pocet}
+				set {_time} to now
+				delete {Auren_.raidodmena}
+				execute console command "mail send TheDarkLord173 &4%player% &fauren raid boss &avstup &e%{_time}%"
+				set {Auren_.raid} to 1
+				set {Auren_.raid.boss1} to "/AurenRaidBoss boss1"
+				set {Auren_.raid.boss2} to "/AurenRaidBoss boss2"
+				set {Auren_.raid.boss3} to "/AurenRaidBoss boss3"
+				set {Auren_.raid.boss4} to "/AurenRaidBoss boss4"
+				set {Auren_.raid.boss5} to "/AurenRaidBoss boss5"
+				set {Auren_.raid.boss6} to "/AurenRaidBoss boss6"
+				set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+				while {Auren_.raid.rada.prikaz} is not set:
+					set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+				make player execute command "%{Auren_.raid.rada.prikaz}%"
+				wait 30 minutes
+#				if {Auren_.raidodmena} is set:
+#					wait {Auren_.raidodmena} minutes
+				if {Auren_.pristupdodungeonu::%player%} is 2:
+					if difference between {time::%player%} and now is less than 30 minutes:
+						stop
+					delete {Auren_.raid}
+					teleport player to location at {@Aurensoloraidkonec} in world "war"
+					execute console command "/AurenRaidBoss odmena"
+					set {_time} to now
+					execute console command "mail send TheDarkLord173 &4%player% &fauren raid boss &codchod &e%{_time}% &f- &2%{Auren_.raidodmena}%"
+					send "&e&l[RAID] &cTvuj cas v raidu vyprsel!" to player
+					teleport player to location at {@Aurensoloraidkonec} in world "war" 
+					delete {Auren_.pristupdodungeonu::%player%}
+					wait 2 seconds
+					broadcast "&e&l[RAID] &c%player% &auspesne dokoncil raid!"
+					execute console command "/AurenRaidBossodport %player%"
+					stop
+			else:
+				send "&e&l[RAID] &cNemas zakoupeny klic!" to player		
+				stop
+		if arg-1 is "boss1":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid1} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid1} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss1 1 war,{@Aurensoloraidspawn1}"
+			stop
+		if arg-1 is "boss2":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid2} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid2} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss2 1 war,{@Aurensoloraidspawn2}"
+			stop
+		if arg-1 is "boss3":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid3} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid3} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss3 1 war,{@Aurensoloraidspawn3}"
+			stop
+		if arg-1 is "boss4":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid4} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid4} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss4 1 war,{@Aurensoloraidspawn4}"
+			stop
+		if arg-1 is "boss5":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid5} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid5} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss5 1 war,{@Aurensoloraidspawn5}"
+			stop
+		if arg-1 is "boss6":
+			if {Auren_.raid} is not set:
+				stop
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid6} war"
+			wait 3 ticks
+			execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraid6} war"
+			execute console command "mm m spawn runboss"
+			wait 10 ticks
+			execute console command "mm m spawn runboss6 1 war,{@Aurensoloraidspawn6}"
+			stop
+		if arg-1 is "odmena":
+			execute console command "mm m kill runboss"
+			if {Auren_.raidodmena} is not set:
+				stop
+			if {Auren_.raidodmena} is 1:
+				execute console command "mm m spawn RaidOdmena1 1 war,{@Aurensoloraidodmena}"
+			if {Auren_.raidodmena} is 2:
+				execute console command "mm m spawn RaidOdmena2 1 war,{@Aurensoloraidodmena}"
+			if {Auren_.raidodmena} is 3:
+				execute console command "mm m spawn RaidOdmena3 1 war,{@Aurensoloraidodmena}"	
+			if {Auren_.raidodmena} is 4:
+				execute console command "mm m spawn RaidOdmena4 1 war,{@Aurensoloraidodmena}"
+			if {Auren_.raidodmena} is 5:
+				execute console command "mm m spawn RaidOdmena5 1 war,{@Aurensoloraidodmena}"	
+			if {Auren_.raidodmena} is 6:
+				execute console command "mm m spawn RaidOdmena6 1 war,{@Aurensoloraidodmena}"
+			if {Auren_.raidodmena} is more than 6:
+				execute console command "mm m spawn RaidOdmena6 1 war,{@Aurensoloraidodmena}"
+			stop
+		if arg-1 is "reset":
+			delete {Auren_.pristupdodungeonu::%player%}
+			delete {Auren_.raid}
+			stop
+		if arg-1 is "pocet":
+			send "&4&l%{Auren_.raid.pocet}%" to player
+
+command /AurenRaidBossodport <player>:
+	permission: prehled.admin
+	trigger:
+		set {Auren_.raidhracodport} to "%arg-1%" parsed as player
+		set {Auren_.raidhracodportcas} to now
+		delete {Auren_.raid}
+		wait 2 minutes
+		if {Auren_.raidhracodport} is within {Auren_.raidodmenamisto1} to {Auren_.raidodmenamisto2}:
+			execute console command "/spawn %{Auren_.raidhracodport}%"
+			send "&e&l[RAID] &cNa tomto miste jiz nemas co hledat!" to {Auren_.raidhracodport}
+			stop
+on mythicmob deathevent:
+	if mobtype of activemob event-activemob is "runboss1":
+		delete {Auren_.raid.boss1}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss2":
+		delete {Auren_.raid.boss2}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss3":
+		delete {Auren_.raid.boss3}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss4":
+		delete {Auren_.raid.boss4}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss5":
+		delete {Auren_.raid.boss5}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss6":
+		delete {Auren_.raid.boss6}
+		add 1 to {Auren_.raidodmena}
+	if mobtype of activemob event-activemob is "runboss1" or "runboss2" or "runboss3" or "runboss4" or "runboss5" or "runboss6":
+		if {Auren_.raid.boss1} is not set:
+			if {Auren_.raid.boss2} is not set:
+				if {Auren_.raid.boss3} is not set:
+					if {Auren_.raid.boss4} is not set:
+						if {Auren_.raid.boss5} is not set:
+							if {Auren_.raid.boss6} is not set:
+								if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is 2:
+									wait 5 seconds
+									execute console command "tppos %{Auren_.raid.hrac}% {@Aurensoloraidkonec2} war"
+									execute console command "/AurenRaidBoss odmena"
+									broadcast "&e&l[RAID] &c%{Auren_.raid.hrac}% &auspesne porazil vsechny prisery Muquadasu!"
+									set {_time} to now
+									execute console command "mail send TheDarkLord173 &4%{Auren_.raid.hrac}% &fauren raid boss &codchod &e%{_time}% &f- &2%{Auren_.raidodmena}%"
+									execute console command "/AurenRaidBossodport %{Auren_.raid.hrac}%"
+									delete {Auren_.raidodmena}
+									delete {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%}
+									stop
+	if mobtype of activemob event-activemob is "runboss1":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+	if mobtype of activemob event-activemob is "runboss2":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+	if mobtype of activemob event-activemob is "runboss3":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+	if mobtype of activemob event-activemob is "runboss4":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+	if mobtype of activemob event-activemob is "runboss5":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+	if mobtype of activemob event-activemob is "runboss6":
+		if {Auren_.pristupdodungeonu::%{Auren_.raid.hrac}%} is not set:
+			stop
+		if {Auren_.raid} is not set:
+			stop
+		set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		while {Auren_.raid.rada.prikaz} is "<none>":
+			wait 0.1 seconds
+			set {Auren_.raid.rada.prikaz} to random element of "%{Auren_.raid.boss1}%", "%{Auren_.raid.boss2}%", "%{Auren_.raid.boss3}%", "%{Auren_.raid.boss4}%", "%{Auren_.raid.boss5}%", "%{Auren_.raid.boss6}%"
+		wait 12 seconds
+		execute console command "%{Auren_.raid.rada.prikaz}%"
+on logout:
+	if {Auren_.pristupdodungeonu::%player%} is 2:
+		delete {Auren_.pristupdodungeonu::%player%}
+		set {Auren_.odpojeniraidodmena.%player%} to 1
+		set {Auren_.raidhracodportcas} to now
+		execute console command "mm m kill runboss"
+		wait 2 minutes
+		delete {Auren_.raid}
+	if player is within {Auren_.raidodmenamisto1} to {Auren_.raidodmenamisto2}:
+		set {Auren_.odpojeniraidodmena.%player%} to 2
+		delete {Auren_.raidhracodportcas}
+		stop
+on login:
+	if {Auren_.odpojeniraidodmena.%player%} is 2:
+		if player is within {Auren_.raidodmenamisto1} to {Auren_.raidodmenamisto2}:
+			execute console command "spawn %player%"
+			delete {Auren_.odpojeniraidodmena.%player%}
+			delete {Auren_.pristupdodungeonu::%player%}
+			stop
+	if {Auren_.odpojeniraidodmena.%player%} is 1:
+		if difference between {Auren_.raidhracodportcas} and now is more than 2 minutes:
+			delete {Auren_.pristupdodungeonu::%player%}
+			delete {Auren_.odpojeniraidodmena.%player%}
+			set {_time} to now
+			execute console command "mail send TheDarkLord173 &4%player% &fauren raid boss &cpripojeni po 2 minutach &e(&e%{_time}%) &4&lnedostava se odmena!!!"
+			execute console command "spawn %player%"
+			stop
+		else:
+			set {_time} to now
+			broadcast "&e&l[RAID] &c%player% se odpojil v Muquadasu!"
+			execute console command "mail send TheDarkLord173 &4%player% &fauren raid boss &codchod &e%{_time}% &f- &2%{Auren_.raidodmena}% &4&l(odpojeni)"
+			execute console command "/AurenRaidBoss odmena"
+			delete {Auren_.pristupdodungeonu::%player%}
+			delete {Auren_.odpojeniraidodmena.%player%}
+			teleport player to location at {@Aurensoloraidkonec} in world "war"
+			execute console command "/AurenRaidBossodport %player%"
+			stop
+on death of player:
+	if {Auren_.pristupdodungeonu::%player%} is 2:
+		delete {Auren_.raid}
+		clear effects of player
+		force player to respawn
+		make player run command "/undisguise" as op
+		teleport player to location at {@Aurensoloraidkonec} in world "war"
+		execute console command "/AurenRaidBoss odmena"
+		if {Auren_.raidodmena} is more than 0:
+			broadcast "&e&l[RAID] &c%player% &azemrel v Muquadasu ale presto si zaslouzi odmenu!"
+		if {Auren_.raidodmena} is not set:
+			broadcast "&e&l[RAID] &c%player% &azemrel v Muquadasu!"
+		set {_time} to now
+		execute console command "mail send TheDarkLord173 &4%player% &fauren raid boss &codchod &e%{_time}% &f- &2%{Auren_.raidodmena}%"
+		delete {Auren_.pristupdodungeonu::%player%}
+		execute console command "/AurenRaidBossodport %player%"
+		stop
+
+command /AurenRaidBossuse [<text>]:
+	permission: prehled.admin
+	executable by: player and console
+	trigger:
+		set {Auren_.pristupkoupeni::%arg-1%} to 1
+
+on step on lava:
+	set {_regions} to "%regions at player%"
+	if {_regions} contain "raidbossauren":
+		kill player
+
+on npc right click:
+	if citizen is {@citizenrunboss2}:
+		if {Auren_.mesec::%player%} is not set:
+			stop
+		open chest with 1 rows named "&dNechces si neco koupit?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&dNechces si neco koupit?":
+			stop
+		set {_slot} to 0
+		loop 9 times:
+			format gui slot {_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {_slot}
+		if player has permission "vampir.obycejny" or "vampire.mode.bloodlust":
+			format gui slot 4 of player with sugar with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lPosilujici substance" with lore "||&dMuze byt pouzito ke snadnejsimu||&dpruchodu sinemi Muquadasu||&fSila II na 30 minut||&fRychlost II na 30 minut||&fRegenerace I na 10 minut||||&5Po kliknuti se aktivuje buff||||&eCena: &2{@cenapotionvampir} smaragdovych minci" to do nothing
+		else:
+			format gui slot 4 of player with sugar with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lPosilujici substance" with lore "||&dMuze byt pouzito ke snadnejsimu||&dpruchodu sinemi Muquadasu||&fSila II na 30 minut||&fRychlost II na 30 minut||&fRegenerace I na 10 minut||||&5Po kliknuti se aktivuje buff||||&eCena: &2{@cenapotion} smaragdovych minci" to do nothing
+
+	if citizen is {@citizenrunboss3}:
+		if {Auren_.mesec::%player%} is not set:
+			stop
+		open chest with 1 rows named "&eNechces si neco koupit?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&eNechces si neco koupit?":
+			stop
+		set {_slot} to 0
+		loop 9 times:
+			format gui slot {_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {_slot}
+		if player has permission "vampir.obycejny" or "vampire.mode.bloodlust":
+			format gui slot 3 of player with potion with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lPosilujici lektvar" with lore "||&dMuze byt pouzito ke snadnejsimu||&dzabijeni podivnych tvoru||&fSila II na 10 minut||&fRychlost II na 10 minut||||&5Po kliknuti se aktivuje buff||||&eCena: &2{@cenapotion2vampir} smaragdovych minci" to do nothing
+		else:
+			format gui slot 3 of player with potion with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lPosilujici lektvar" with lore "||&dMuze byt pouzito ke snadnejsimu||&dzabijeni podivnych tvoru||&fSila II na 10 minut||&fRychlost II na 10 minut||||&5Po kliknuti se aktivuje buff||||&eCena: &2{@cenapotion2} smaragdovych minci" to do nothing
+		format gui slot 5 of player with lingering potion of regeneration with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lLektvar regenerace" with lore "||&dMuze byt pouzito ke snadnejsimu||&dzabijeni podivnych tvoru||&fRegenerace I na 5 minut||||&5Po kliknuti se aktivuje buff||||&eCena: &2{@cenapotion3} smaragdovych minci" to do nothing
+
+	if citizen is {@citizenrunboss4}:
+		if {Auren_.mesec::%player%} is not set:
+			stop
+		open chest with 1 rows named "&eNechces nekam prevest?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&eNechces nekam prevest?":
+			stop
+		set {_slot} to 0
+		loop 9 times:
+			format gui slot {_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {_slot}
+		format gui slot 0 of player with diamond_hoe:754 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lpolowb Mumie" with lore "&fPreveze vas k archeologickym||&fvykopavkam||||&eCena: &2250 smaragdovych minci"
+		format gui slot 2 of player with diamond_hoe:814 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lTrosky mesta Ao-ren" with lore "&fPreveze vas k troskam||&fmesta Ao-ren||||&eCena: &2250 smaragdovych minci"
+		format gui slot 4 of player with diamond_hoe:753 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lWorldboss Qaizah" with lore "&fPreveze vas k pokladnici||&fv niz se skryva dzin||||&eCena: &2250 smaragdovych minci"
+		format gui slot 6 of player with cake with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lpolowb Tlusty shaman" with lore "&fPreveze vas k lidozroutum||||&eCena: &2250 smaragdovych minci"
+		format gui slot 8 of player with diamond_hoe:792 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lpolowb Palma" with lore "&fPreveze vas k posvatne||&fpalme plne zivota||||&eCena: &2250 smaragdovych minci"
+
+	if citizen is {@citizenrunboss5}:
+		if {Auren_.mesec::%player%} is not set:
+			stop
+		open chest with 1 rows named "&dNechces nekam prevest?" to player
+		wait 3 ticks
+		if inventory name of current inventory of player is not "&dNechces nekam prevest?":
+			stop
+		set {_slot} to 0
+		loop 9 times:
+			format gui slot {_slot} of player with light gray stained glass pane with nbt "{Unbreakable:1b,HideFlags:6}" named " " to do nothing
+			add 1 to {_slot}
+		format gui slot 4 of player with diamond_hoe:753 with nbt "{Unbreakable:1b,HideFlags:6}" named "&6&lWorldboss Qaizah" with lore "&fJestli chces muzu te||&fvzit k dzinove pokladnici||||&eCena: &250 smaragdovych minci"
+
+on inventory click:
+	if inventory name of current inventory of player contains "&dNechces si neco koupit?":
+		if clicked slot is 4:
+			if player has permission "vampir.obycejny" or "vampire.mode.bloodlust":
+				if {Auren_.zlataky::%player%} is more than ({@cenapotionvampir}-1):
+					execute console command "/aurenskezlataky %player% take {@cenapotionvampir}"
+					execute console command "effect %player% minecraft:speed 1800 1 true"
+					execute console command "effect %player% minecraft:strength 1800 1 true"
+					execute console command "effect %player% minecraft:regeneration 600 0 true"
+					send "&eKoupil sis specialni lektvar!" to player
+				else:
+					send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+					close player's inventory
+					stop
+			else:
+				if {Auren_.zlataky::%player%} is more than ({@cenapotion}-1):
+					execute console command "/aurenskezlataky %player% take {@cenapotion}"
+					execute console command "effect %player% minecraft:speed 1800 1 true"
+					execute console command "effect %player% minecraft:strength 1800 1 true"
+					execute console command "effect %player% minecraft:regeneration 600 0 true"
+					send "&eKoupil sis specialni lektvar!" to player
+				else:
+					send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+					close player's inventory
+					stop
+	if inventory name of current inventory of player contains "&eNechces si neco koupit?":
+		if clicked slot is 3:
+			if player has permission "vampir.obycejny" or "vampire.mode.bloodlust":
+				if {Auren_.zlataky::%player%} is more than ({@cenapotion2vampir}-1):
+					execute console command "/aurenskezlataky %player% take {@cenapotion2vampir}"
+					execute console command "effect %player% minecraft:speed 600 1 true"
+					execute console command "effect %player% minecraft:strength 600 1 true"
+					send "&eKoupil sis specialni lektvar!" to player
+				else:
+					send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+					close player's inventory
+					stop
+			else:
+				if {Auren_.zlataky::%player%} is more than ({@cenapotion2}-1):
+					execute console command "/aurenskezlataky %player% take {@cenapotion2}"
+					execute console command "effect %player% minecraft:speed 600 1 true"
+					execute console command "effect %player% minecraft:strength 600 1 true"
+					send "&eKoupil sis specialni lektvar!" to player
+				else:
+					send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+					close player's inventory
+					stop
+		if clicked slot is 5:
+			if {Auren_.zlataky::%player%} is more than ({@cenapotion3}-1):
+				execute console command "/aurenskezlataky %player% take {@cenapotion3}"
+				execute console command "effect %player% minecraft:regeneration 300 0 true"
+				send "&eKoupil sis specialni lektvar!" to player
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+	if inventory name of current inventory of player contains "&eNechces nekam prevest?":
+		if clicked slot is 0:
+			if {Auren_.zlataky::%player%} is more than 249:
+				execute console command "tppos %player% -846.5 53 -1279.5 world 0 270"
+				execute console command "/aurenskezlataky %player% take 250"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+		if clicked slot is 2:
+			if {Auren_.zlataky::%player%} is more than 249:
+				execute console command "tppos %player% -1332.5 32 -1244.5 world 0 180"
+				execute console command "/aurenskezlataky %player% take 250"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+		if clicked slot is 4:
+			if {Auren_.zlataky::%player%} is more than 249:
+				execute console command "tppos %player% -928.5 64 -1152.5 world 0 90"
+				execute console command "/aurenskezlataky %player% take 250"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+		if clicked slot is 6:
+			if {Auren_.zlataky::%player%} is more than 249:
+				execute console command "tppos %player% -1540.5 70 -1096.5 world 0 90"
+				execute console command "/aurenskezlataky %player% take 250"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+		if clicked slot is 8:
+			if {Auren_.zlataky::%player%} is more than 249:
+				execute console command "tppos %player% -541.5 63 -1029.5 world 0 270"
+				execute console command "/aurenskezlataky %player% take 250"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop
+
+	if inventory name of current inventory of player contains "&dNechces nekam prevest?":
+		if clicked slot is 4:
+			if {Auren_.zlataky::%player%} is more than 49:
+				execute console command "tppos %player% -928.5 64 -1152.5 world 0 90"
+				execute console command "/aurenskezlataky %player% take 50"
+				send "&dMuzes pouzit muj koberec!" to player
+				close player's inventory
+			else:
+				send "&eNemas dostatecne mnozstvi &2smaragdovych minci&e!" to player
+				close player's inventory
+				stop

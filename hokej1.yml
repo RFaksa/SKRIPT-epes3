@@ -1,0 +1,405 @@
+#=================================================
+#Hokejový event
+#=================================================
+LDortPuk:
+  Type: pig
+  Display: ''
+  Damage: 0
+  Health: 2000
+  Faction: Puk
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Branka
+  Disguise:
+    Type: armor_stand
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Equipment:
+  - HokejPuk:4
+  Options:
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+   CanMove: true
+   Invisible: true
+   MovementSpeed: 0.01
+   Silent: true
+   NoDamageTicks: 8
+  Skills:
+  - equip{item=HokejPuk:4} @self ~onSpawn
+  - potion{type=INVISIBILITY;duration=999999;lvl=1} @self ~onSpawn
+  - setgravity{g=false} @self ~onSpawn
+  - consume{d=2000;h=0} @MobsInRadius{type=LdortBranky;r=1.1} ~onTimer:10
+  - consume{d=300;h=0} @MobsInRadius{types=HokejRestartcervena1;r=0.8} ~onTimer:10
+  - consume{d=300;h=0} @MobsInRadius{types=HokejRestartcervena2;r=0.8} ~onTimer:10
+  - consume{d=300;h=0} @MobsInRadius{types=HokejRestartmodra1;r=0.8} ~onTimer:10
+  - consume{d=300;h=0} @MobsInRadius{types=HokejRestartmodra2;r=0.8} ~onTimer:10
+#=================================================
+#Puk v červené bráně
+#=================================================
+TabulkaLdortcervena:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 2000
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - setgravity{g=false} @self ~onSpawn
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="hokej zapas red gol"} ~onDeath
+  - damage{a=300} @MobsInRadius{r=70;types=LdortHokej} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+  - effect:particles{particle=reddust;color=#ff0000;amount=500;hS=10;vS=10;S=0.1} @self ~onDeath
+HokejRestartcervena1:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Faction: Branka
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Puk
+  Disguise:
+    Type: silverfish
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   Collidable: false
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - velocity{m=set;x=0;y=0;z=0} @self ~onTimer:5
+  - command{c="hokej zapas buly red levo"} ~onDeath
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="mm m spawn LdortHokej 1 pvp,2337.5,56,-1187.5"} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+HokejRestartcervena2:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Faction: Branka
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Puk
+  Disguise:
+    Type: silverfish
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Options:
+   Collidable: false
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - velocity{m=set;x=0;y=0;z=0} @self ~onTimer:5
+  - command{c="hokej zapas buly red pravo"} ~onDeath
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="mm m spawn LdortHokej 1 pvp,2337.5,56,-1187.5"} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+#=================================================
+#Puk v modré bráně
+#=================================================
+TabulkaLdortmodra:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 2000
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - setgravity{g=false} @self ~onSpawn
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="hokej zapas blue gol"} ~onDeath
+  - damage{a=300} @MobsInRadius{r=70;types=LdortHokej} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+  - effect:particles{particle=reddust;color=#0015ff;amount=500;hS=10;vS=10;S=0.1} @self ~onDeath
+HokejRestartmodra1:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Faction: Branka
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Puk
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   Collidable: false
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Disguise:
+    Type: silverfish
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: true
+  Skills:
+  - velocity{m=set;x=0;y=0;z=0} @self ~onTimer:5
+  - command{c="hokej zapas buly blue pravo"} ~onDeath
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="mm m spawn LdortHokej 1 pvp,2337.5,56,-1187.5"} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+HokejRestartmodra2:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Faction: Branka
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Puk
+  Disguise:
+    Type: silverfish
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: true
+  Options:
+   Collidable: false
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - velocity{m=set;x=0;y=0;z=0} @self ~onTimer:5
+  - command{c="hokej zapas buly blue levo"} ~onDeath
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+  - command{c="mm m spawn LdortHokej 1 pvp,2337.5,56,-1187.5"} ~onDeath
+  - potion{type=INVISIBILITY;duration=300000;lvl=1} @self ~onSpawn
+#=================================================
+#Systém branek
+#=================================================
+LdortBranky:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 2000
+  Faction: Branka
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  AITargetSelectors:
+  - 0 clear
+  - 1 specificfactionmonsters Puk
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+   KnockbackResistance: 1
+   Collidable: false
+  Skills:
+  - velocity{m=set;x=0;y=0;z=0} @self ~onTimer:5
+  - consume{d=2000;h=0} @MobsInRadius{types=TabulkaLdortcervena;r=10} ~onDeath
+  - consume{d=2000;h=0} @MobsInRadius{types=TabulkaLdortmodra;r=10} ~onDeath
+  - stun{f=true} @self
+  - potion{type=INVISIBILITY;duration=999999;lvl=1} @self ~onSpawn
+#=================================================
+#Spouštění
+#=================================================
+LdortHokej:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   Collidable: false
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - effect:particles{particle=reddust;color=#00826c;amount=50;hS=1;vS=1;S=0.1} @self ~onTimer:20
+  - command{c="mm m spawn LdortBranky 1 pvp,2314.5,48,-1161.3"} ~onSpawn
+  - command{c="mm m spawn LdortBranky 1 pvp,2313.5,48,-1161.3"} ~onSpawn
+  - command{c="mm m spawn LdortBranky 1 pvp,2312.5,48,-1161.3"} ~onSpawn
+  - command{c="mm m spawn LdortBranky 1 pvp,2312.5,48,-1213.7"} ~onSpawn
+  - command{c="mm m spawn LdortBranky 1 pvp,2313.5,48,-1213.7"} ~onSpawn
+  - command{c="mm m spawn LdortBranky 1 pvp,2314.5,48,-1213.7"} ~onSpawn
+  - command{c="mm m spawn TabulkaLdortcervena 1 pvp,2313.5,52,-1162.5"} ~onSpawn
+  - command{c="mm m spawn TabulkaLdortmodra 1 pvp,2313.5,52,-1212.5"} ~onSpawn
+  - command{c="mm m spawn HokejRestartcervena1 1 pvp,2311.2,48,-1213.5"} ~onSpawn
+  - command{c="mm m spawn HokejRestartcervena1 1 pvp,2312.5,48,-1214.8"} ~onSpawn
+  - command{c="mm m spawn HokejRestartcervena1 1 pvp,2313.5,48,-1214.8"} ~onSpawn
+  - command{c="mm m spawn HokejRestartcervena2 1 pvp,2314.5,48,-1214.8"} ~onSpawn
+  - command{c="mm m spawn HokejRestartcervena2 1 pvp,2315.8,48,-1213.5"} ~onSpawn
+  - command{c="mm m spawn HokejRestartmodra1 1 pvp,2311.2,48,-1161.5"} ~onSpawn
+  - command{c="mm m spawn HokejRestartmodra1 1 pvp,2312.5,48,-1160.2"} ~onSpawn
+  - command{c="mm m spawn HokejRestartmodra2 1 pvp,2313.5,48,-1160.2"} ~onSpawn
+  - command{c="mm m spawn HokejRestartmodra2 1 pvp,2314.5,48,-1160.2"} ~onSpawn
+  - command{c="mm m spawn HokejRestartmodra2 1 pvp,2315.8,48,-1161.5"} ~onSpawn
+  - command{c="mm m kill LdortBranky"} ~onDeath
+  - command{c="mm m kill LdortHokej"} ~onDeath
+  - command{c="mm m kill LDortPuk"} ~onDeath
+  - command{c="mm m kill TabulkaLdortcervena"} ~onDeath
+  - command{c="mm m kill TabulkaLdortmodra"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena1"} ~onDeath
+  - command{c="mm m kill HokejRestartcervena2"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra1"} ~onDeath
+  - command{c="mm m kill HokejRestartmodra2"} ~onDeath
+#=================================================
+#Začne hru, je jedno kde pořadatel stojí
+#=================================================
+HokejStart:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - command{c="mm m spawn LdortHokej 1 pvp,2337.5,56,-1187.5"} ~onSpawn
+  - command{c="mm m kill HokejStart"} ~onTimer:5
+  - effect:particles{particle=reddust;color=#ed8aff;amount=50;hS=1;vS=1;S=0.1} @self ~onSpawn
+#=================================================
+#Stopne hru, je jedno kde hráč stojí
+#=================================================
+HokejStop:
+  Type: silverfish
+  Display: ''
+  Damage: 0
+  Health: 300
+  Options:
+   MovementSpeed: 0.01
+   Silent: true
+   PreventRenaming: true
+   PreventLeashing: true
+   PreventItemPickup: true
+   PreventRandomEquipment: true
+   PreventOtherDrops: true
+  Skills:
+  - command{c="mm m kill LdortBranky"} ~onSpawn
+  - command{c="mm m kill LdortHokej"} ~onSpawn
+  - command{c="mm m kill LDortPuk"} ~onSpawn
+  - command{c="mm m kill TabulkaLdortcervena"} ~onSpawn
+  - command{c="mm m kill TabulkaLdortmodra"} ~onSpawn
+  - command{c="mm m kill HokejRestartcervena1"} ~onSpawn
+  - command{c="mm m kill HokejRestartcervena2"} ~onSpawn
+  - command{c="mm m kill HokejRestartmodra1"} ~onSpawn
+  - command{c="mm m kill HokejRestartmodra2"} ~onSpawn
+  - command{c="mm m kill HokejStop"} ~onTimer:5
+  - effect:particles{particle=reddust;color=#fcba03;amount=50;hS=1;vS=1;S=0.1} @self ~onSpawn

@@ -1,0 +1,499 @@
+command /TheDarkLord173:
+	permission: prehled.admin
+	executable by: player and console
+	trigger:
+		if {tutorial_.:%player%} is not set:
+			send "&c&lMusis si nejprve vybrat zbran!" to player
+			stop
+		set block at location at 138, 74, -412 in world "war" to air
+		set block at location at 139, 74, -412 in world "war" to air
+		set block at location at 140, 74, -412 in world "war" to air
+		set block at location at 141, 74, -412 in world "war" to air
+		set block at location at 142, 74, -412 in world "war" to air
+		set block at location at 138, 73, -412 in world "war" to stone_brick
+		set block at location at 139, 73, -412 in world "war" to stone:6
+		set block at location at 140, 73, -412 in world "war" to gold_block
+		set block at location at 141, 73, -412 in world "war" to stone:6
+		set block at location at 142, 73, -412 in world "war" to stone_brick
+		set block at location at 138, 72, -412 in world "war" to stone_brick:3
+		set block at location at 139, 72, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 140, 72, -412 in world "war" to stone:6
+		set block at location at 141, 72, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 142, 72, -412 in world "war" to stone_brick:3
+		set block at location at 138, 71, -412 in world "war" to stone_brick:3
+		set block at location at 139, 71, -412 in world "war" to stone_brick
+		set block at location at 140, 71, -412 in world "war" to stone_brick
+		set block at location at 141, 71, -412 in world "war" to stone_brick
+		set block at location at 142, 71, -412 in world "war" to stone_brick:3
+		execute console command "/playsound minecraft:block.stone.break player %player% ~ ~ ~ 5 2 1"
+		execute console command "/playsound minecraft:block.wool.break player %player% ~ ~ ~ 1 1 1"
+		wait 2 seconds
+		set block at location at 138, 73, -412 in world "war" to air
+		set block at location at 139, 73, -412 in world "war" to air
+		set block at location at 140, 73, -412 in world "war" to air
+		set block at location at 141, 73, -412 in world "war" to air
+		set block at location at 142, 73, -412 in world "war" to air
+		set block at location at 138, 72, -412 in world "war" to stone_brick
+		set block at location at 139, 72, -412 in world "war" to stone:6
+		set block at location at 140, 72, -412 in world "war" to gold_block
+		set block at location at 141, 72, -412 in world "war" to stone:6
+		set block at location at 142, 72, -412 in world "war" to stone_brick
+		set block at location at 138, 71, -412 in world "war" to stone_brick:3
+		set block at location at 139, 71, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 140, 71, -412 in world "war" to stone:6
+		set block at location at 141, 71, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 142, 71, -412 in world "war" to stone_brick:3
+		execute console command "/playsound minecraft:block.stone.break player %player% ~ ~ ~ 5 2 1"
+		execute console command "/playsound minecraft:block.wool.break player %player% ~ ~ ~ 1 1 1"
+		wait 2 seconds
+		set block at location at 138, 72, -412 in world "war" to air
+		set block at location at 139, 72, -412 in world "war" to air
+		set block at location at 140, 72, -412 in world "war" to air
+		set block at location at 141, 72, -412 in world "war" to air
+		set block at location at 142, 72, -412 in world "war" to air
+		set block at location at 138, 71, -412 in world "war" to stone_brick
+		set block at location at 139, 71, -412 in world "war" to stone:6
+		set block at location at 140, 71, -412 in world "war" to gold_block
+		set block at location at 141, 71, -412 in world "war" to stone:6
+		set block at location at 142, 71, -412 in world "war" to stone_brick
+		execute console command "/playsound minecraft:block.stone.break player %player% ~ ~ ~ 5 2 1"
+		execute console command "/playsound minecraft:block.wool.break player %player% ~ ~ ~ 1 1 1"
+		wait 2 seconds
+		set block at location at 138, 71, -412 in world "war" to air
+		set block at location at 139, 71, -412 in world "war" to air
+		set block at location at 140, 71, -412 in world "war" to air
+		set block at location at 141, 71, -412 in world "war" to air
+		set block at location at 142, 71, -412 in world "war" to air
+		execute console command "/playsound minecraft:block.stone.break player %player% ~ ~ ~ 5 2 1"
+		execute console command "/playsound minecraft:block.wool.break player %player% ~ ~ ~ 1 1 1"
+		wait 10 seconds
+		set block at location at 138, 72, -412 in world "war" to air
+		set block at location at 139, 72, -412 in world "war" to air
+		set block at location at 140, 72, -412 in world "war" to air
+		set block at location at 141, 72, -412 in world "war" to air
+		set block at location at 142, 72, -412 in world "war" to air
+		set block at location at 138, 71, -412 in world "war" to stone_brick
+		set block at location at 139, 71, -412 in world "war" to stone:6
+		set block at location at 140, 71, -412 in world "war" to gold_block
+		set block at location at 141, 71, -412 in world "war" to stone:6
+		set block at location at 142, 71, -412 in world "war" to stone_brick
+		execute console command "/playsound minecraft:block.stone.place player %player% ~ ~ ~ 1 1 1"
+		wait 1 seconds
+		set block at location at 138, 73, -412 in world "war" to air
+		set block at location at 139, 73, -412 in world "war" to air
+		set block at location at 140, 73, -412 in world "war" to air
+		set block at location at 141, 73, -412 in world "war" to air
+		set block at location at 142, 73, -412 in world "war" to air
+		set block at location at 138, 72, -412 in world "war" to stone_brick
+		set block at location at 139, 72, -412 in world "war" to stone:6
+		set block at location at 140, 72, -412 in world "war" to gold_block
+		set block at location at 141, 72, -412 in world "war" to stone:6
+		set block at location at 142, 72, -412 in world "war" to stone_brick
+		set block at location at 138, 71, -412 in world "war" to stone_brick:3
+		set block at location at 139, 71, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 140, 71, -412 in world "war" to stone:6
+		set block at location at 141, 71, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 142, 71, -412 in world "war" to stone_brick:3
+		execute console command "/playsound minecraft:block.stone.place player %player% ~ ~ ~ 1 1 1"
+		wait 1 seconds
+		set block at location at 138, 74, -412 in world "war" to air
+		set block at location at 139, 74, -412 in world "war" to air
+		set block at location at 140, 74, -412 in world "war" to air
+		set block at location at 141, 74, -412 in world "war" to air
+		set block at location at 142, 74, -412 in world "war" to air
+		set block at location at 138, 73, -412 in world "war" to stone_brick
+		set block at location at 139, 73, -412 in world "war" to stone:6
+		set block at location at 140, 73, -412 in world "war" to gold_block
+		set block at location at 141, 73, -412 in world "war" to stone:6
+		set block at location at 142, 73, -412 in world "war" to stone_brick
+		set block at location at 138, 72, -412 in world "war" to stone_brick:3
+		set block at location at 139, 72, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 140, 72, -412 in world "war" to stone:6
+		set block at location at 141, 72, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 142, 72, -412 in world "war" to stone_brick:3
+		set block at location at 138, 71, -412 in world "war" to stone_brick:3
+		set block at location at 139, 71, -412 in world "war" to stone_brick
+		set block at location at 140, 71, -412 in world "war" to stone_brick
+		set block at location at 141, 71, -412 in world "war" to stone_brick
+		set block at location at 142, 71, -412 in world "war" to stone_brick:3
+		execute console command "/playsound minecraft:block.stone.place player %player% ~ ~ ~ 1 1 1"
+		wait 1 seconds
+		set block at location at 138, 74, -412 in world "war" to stone_brick
+		set block at location at 139, 74, -412 in world "war" to stone:6
+		set block at location at 140, 74, -412 in world "war" to gold_block
+		set block at location at 141, 74, -412 in world "war" to stone:6
+		set block at location at 142, 74, -412 in world "war" to stone_brick
+		set block at location at 138, 73, -412 in world "war" to stone_brick:3
+		set block at location at 139, 73, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 140, 73, -412 in world "war" to stone:6
+		set block at location at 141, 73, -412 in world "war" to stone_brick_stairs:3
+		set block at location at 142, 73, -412 in world "war" to stone_brick:3
+		set block at location at 138, 72, -412 in world "war" to stone_brick:3
+		set block at location at 139, 72, -412 in world "war" to stone_brick
+		set block at location at 140, 72, -412 in world "war" to stone_brick
+		set block at location at 141, 72, -412 in world "war" to stone_brick
+		set block at location at 142, 72, -412 in world "war" to stone_brick:3
+		set block at location at 138, 71, -412 in world "war" to stone_brick:3
+		set block at location at 139, 71, -412 in world "war" to stone_brick:3
+		set block at location at 140, 71, -412 in world "war" to stone_brick:3
+		set block at location at 141, 71, -412 in world "war" to stone_brick:3
+		set block at location at 142, 71, -412 in world "war" to stone_brick:3
+		execute console command "/playsound minecraft:block.stone.place player %player% ~ ~ ~ 1 1 1"
+
+on step on coal block:
+	set {Dlord_22} to location at 16, 31, -3054 in world "stavby"
+	set {Dlord_21} to location at 25, 20, -3040 in world "stavby"
+	if player is within {Dlord_22} to {Dlord_21}:
+		execute console command "/spawn %player%"
+on right click on armor stand:
+	if name of target is "&7Need &a1 gaystone":
+		Set {_name} to "%(uncoloured line 1 of lore of player's tool)%"
+		if {_name} contains "gaystone":
+			send "&5Gate opened!" to player
+			remove 1 of player's tool from player's inventory
+			make player run command "/thedarklord173" as op
+			stop
+command /testicek [<text>]: 
+	trigger:    
+		if arg 1 is set:
+			if arg 1 is "start" :
+				spawn baby zombie at player
+#				disguise last spawned baby zombie's to chicken
+				set last spawned baby zombie's max health to 250
+				set last spawned baby zombie's health to 250
+				apply ambient potion of swiftness of tier 2 to last spawned baby zombie for 999 days
+				set the display name of last spawned baby zombie to "&c&lStrong Zombie"
+				set helmet of last spawned baby zombie to skull of ("TheDarkLord173" parsed as offlineplayer)
+				set chestplate of last spawned baby zombie to diamond_chestplate of protection 4
+				set legs of last spawned baby zombie to diamond_legs of protection 4
+				set boots of last spawned baby zombie to diamond_boots of protection 4
+			if arg 1 is "start2" :
+				spawn baby zombie at player
+				set last spawned baby zombie's max health to 250
+				set last spawned baby zombie's health to 250
+#				increase damage of last spawned baby zombie by 60
+				set the display name of last spawned baby zombie to "&aBaby zombie"
+				set helmet of last spawned baby zombie to skull of ("LukasNovo" parsed as offlineplayer)
+				set chestplate of last spawned baby zombie to diamond_chestplate
+				set legs of last spawned baby zombie to diamond_legs
+				set boots of last spawned baby zombie to diamond_boots
+
+on death of zombie:
+	if name of zombie contains "&c&lStrong Zombie":
+		clear drops
+on damage:
+	if attacker is baby zombie:
+		if name of attacker contains "&cStrong zombie":
+			set {_name} to "&c&lStrong zombie"
+		if name of attacker contains "&aBaby zombie":
+			set {_name} to "&aBaby zombie" 
+		if name of attacker contains "%{_name}%":
+			increase damage by 50
+
+	if victim is baby zombie:
+		if name of victim contains "&c&lStrong zombie":
+			set {_name} to "&c&lStrong zombie"
+		if name of victim contains "&aBaby zombie":
+			set {_name} to "&aBaby zombie" 
+
+		if name of victim contains "%{_name}%":
+			set {_damage} to damage
+			increase damage by 4 * {_damage}
+			wait 1 tick
+			set {_health} to health of victim
+			set {_healthmax} to max health of victim
+			set the display name of victim to "%{_name}% &b%2 * {_health}%&3/&b%2 * {_healthmax}%"
+
+		if name of victim contains "%{_name}%":
+			wait 1 tick
+			set {lastdamage.%uuid of attacker%} to now
+ 
+			remove bossbar "damage.%uuid of attacker%"
+			set {_health} to health of victim
+			set {_healthmax} to max health of victim
+			set {_healthmaxtot} to {_health} / {_healthmax} * 100
+			create bossbar titled "&c&l%name of victim%" and id "damage.%uuid of attacker%" for attacker with progress {_healthmaxtot} with colors red
+ 
+			wait 5 seconds
+			set {_waited} to difference between {lastdamage.%uuid of attacker%} and now
+			if {_waited} is more than 4.5 seconds:
+				remove bossbar "damage.%uuid of attacker%"
+
+
+#on damage:
+#	if victim is player:
+#		stop
+#	wait 1 tick
+#	set {lastdamage.%uuid of victim%} to now
+ #
+#	remove bossbar "damage.%uuid of victim%"
+#	set {_health} to health of victim
+#	set {_healthmax} to max health of victim
+#	set {_healthmaxtot} to {_health} / {_healthmax} * 100
+#	loop players in radius 10 around victim:
+#		create bossbar titled "&c&l%name of victim%" and id "damage.%uuid of victim%" for loop-player with progress {_healthmaxtot} with colors red
+ #
+#	wait 10 seconds
+#	set {_waited} to difference between {lastdamage.%uuid of victim%} and now
+#	if {_waited} is more than 9.5 seconds:
+#		remove bossbar "damage.%uuid of victim%"
+
+
+
+on right click with diamond hoe:
+	Set {_name} to "%(uncoloured line 1 of lore of player's tool)%"
+	if {_name} contains "gaystone":
+		execute console command "/playsound minecraft:block.lever.click player %player% ~ ~ ~ 1 1 1"
+		if {leftclick::%player%} is 1:
+			delete {leftclick::%player%}
+			delete {rightclick::%player%}
+			set action bar of player to "&8&l<< &aR &aL &aR &8&l>>"
+			loop players in radius 10 around player:
+				execute console command "/playsound minecraft:entity.enderdragon.growl player %loop-player% ~ ~ ~ 1 1 1"
+			stop
+		if {rightclick::%player%} is not set:
+			set {rightclick::%player%} to 1
+			set action bar of player to "&8&l<< &aR &7- &7- &8&l>>"
+			stop
+		if {rightclick::%player%} is 1:
+			set {rightclick::%player%} to 2
+			set action bar of player to "&8&l<< &aR &aR &7- &8&l>>"
+			stop
+		if {rightclick::%player%} is 2:
+			delete {rightclick::%player%}
+			set action bar of player to "&8&l<< &aR &aR &aR &8&l>>"
+			push player forward at speed 2
+			set {flyingspell::%player%} to 1
+			loop 10 times:
+				wait 1 tick
+				execute server command "/Execute %player% ~ ~ ~ particle cloud ~ ~ ~0.1 0.1 0.1 0.1 0.1 5"
+			loop 40 times:
+				wait 1 tick
+				execute server command "/Execute %player% ~ ~ ~ particle cloud ~ ~ ~0.1 0.1 0.1 0.1 0.1 5"
+				if block under player is not air:
+					exit 1 loop
+			loop entities in radius 3 around player:
+				if loop-entity = player:
+					stop
+				damage loop-entities by 30
+			stop
+
+on left click with diamond hoe:
+	Set {_name} to "%(uncoloured line 1 of lore of player's tool)%"
+	if {_name} contains "gaystone":
+		if {rightclick::%player%} is 1:
+			execute console command "/playsound minecraft:block.lever.click player %player% ~ ~ ~ 1 1 1"
+			delete {rightclick::%player%}
+			set {leftclick::%player%} to 1
+			set action bar of player to "&8&l<< &aR &aL &7- &8&l>>"
+			stop
+		if {rightclick::%player%} is 2:
+			execute console command "/playsound minecraft:block.lever.click player %player% ~ ~ ~ 1 1 1"
+			delete {rightclick::%player%}
+			delete {leftclick::%player%}
+			set action bar of player to "&8&l<< &aR &aR &aL &8&l>>"
+			loop players in radius 5 around player:
+				execute console command "/playsound minecraft:block.fire.extinguish player %loop-player% ~ ~ ~ 1 1 1"
+				remove swiftness from loop-player
+				remove resistance from loop-player
+				apply potion of swiftness of tier 0.5 to loop-player for 180 seconds
+				apply potion of resistance of tier 0.5 to loop-player for 180 seconds
+			stop
+
+		if {leftclick::%player%} is 1:
+			execute console command "/playsound minecraft:block.lever.click player %player% ~ ~ ~ 1 1 1"
+			delete {leftclick::%player%}
+			set action bar of player to "&8&l<< &aR &aL &aL &8&l>>"
+			loop players in radius 10 around player:
+				execute console command "/playsound minecraft:entity.enderdragon.growl player %loop-player% ~ ~ ~ 1 1 1"
+			stop
+
+#		if name of victim contains "&8[&cIII&8]":
+#			cancel event
+#			set the display name of victim to "%{_name}% &8[&cII&7I&8]"
+#			stop
+#		if name of victim contains "&8[&cII&7I&8]":
+#			cancel event
+#			set the display name of victim to "%{_name}% &8[&cI&7II&8]"
+#			stop
+#		if name of victim contains "&8[&cI&7II&8]":
+#			cancel event
+#			set the display name of victim to "%{_name}% &8[&7III&8]"
+#			stop
+#		if name of victim contains "&8[&7III&8]":
+#			if attacker is player:
+#				cancel event
+#				kill victim
+#				stop
+command /colmamalepero [<text>]:
+	permission: epmmo.admin
+	trigger:
+		set {nasobic} to arg-1 parsed as number
+on damage:
+	if difference between {casevent} and now is less than 10 minutes:
+		if victim is not player:
+			set {_mmjmenomoba} to "%activemob of victim%"
+			if "%{_mmjmenomoba}%" contains "solo" or "Sedohrbet9946378" or "AurenWB1" or "AurenWB2" or "orcgor01583" or "narxes" or "Demondrak1" or "Demondrak2":
+				stop
+			if "%{_mmjmenomoba}%" contains "articusboss1253" or "Amarantevampir65213" or "Azachiel" or "Erleght" or "Ignis62351" or "Nekromanticky_carodej" or "pavoucikralovna02479" or "Vudceguildy_vampir":
+				stop
+			if "%{_mmjmenomoba}%" contains "Strazce_Arigholu62352" or "Lizard6231" or "Stinovy_valecnik" or "Lizards" or "Morgana32158" or "Morganin_drak02315" or "Kraken89562" or "Morskapannaprinezna3678":
+				stop
+			if "%{_mmjmenomoba}%" contains "Morskystrazceboss56231" or "Zabak2653" or "runboss" or "ProkletyStromAuren" or "Posvatnystromobri":
+				stop
+			set {_damage} to damage
+			increase damage by {nasobic} * {_damage}
+
+on mythicmob deathevent:
+	if {casevent} is not set:
+		chance of 100%:
+			set {casevent} to now
+			send " " to all players
+			send "&d&l===========================" to all players
+			send " &d&lDouble event DMG zapnut na 10 minut!" to all players
+			send "&d&l===========================" to all players
+			send " " to all players
+	if difference between {casevent} and now is more than 3 hours:
+		chance of 1%:
+			set {casevent} to now
+			create bossbar titled "&5&lDouble DMG event" and id "doubledmg" for all players with progress 100 with colors purple
+			send " " to all players
+			send "&d&l===========================" to all players
+			send " &d&lDouble DMG event zapnut na 10 minut!" to all players
+			send "&d&l===========================" to all players
+			send " " to all players
+			loop 10 times:
+				wait 1 minute
+				set {_value} to value of bossbar "doubledmg"
+				remove 10 from {_value}
+				set bossbar "doubledmg" value to {_value}
+			remove bossbar "doubledmg"
+			send " " to all players
+			send "&c&l===========================" to all players
+			send " &c&lDouble DMG event skoncil" to all players
+			send "&c&l===========================" to all players
+			send " " to all players
+command /dlord [<text>]:
+	permission: prehled.admin
+	executable by: player and console
+	trigger:
+		if arg-1 is not set:
+			loop 20 times:
+				wait 1 tick
+				open chest with 3 rows named "&6&lOtevirani" to player
+				if inventory name of current inventory of player is not "&6&lOtevirani":
+					stop
+				set {_slot} to 0
+				loop 27 times:
+					add 1 to {_slot}
+					chance of 5%:
+						format gui slot {_slot} of player with {Raid_.Odmena.1} to do nothing
+					else:
+						chance of 5%:
+							format gui slot {_slot} of player with {Raid_.Odmena.2} to do nothing
+						else:
+							chance of 5%:
+								format gui slot {_slot} of player with {Raid_.Odmena.3} to do nothing
+							else:
+								chance of 5%:
+									format gui slot {_slot} of player with {Raid_.Odmena.4} to do nothing
+								else:
+									chance of 5%:
+										format gui slot {_slot} of player with {Raid_.Odmena.5} to do nothing
+									else:
+										chance of 5%:
+											format gui slot {_slot} of player with {Raid_.Odmena.6} to do nothing
+										else:
+											chance of 5%:
+												format gui slot {_slot} of player with {Raid_.Odmena.7} to do nothing
+											else:
+												chance of 5%:
+													format gui slot {_slot} of player with {Raid_.Odmena.8} to do nothing
+												else:
+													chance of 5%:
+														format gui slot {_slot} of player with {Raid_.Odmena.9} to do nothing
+													else:
+														chance of 5%:
+															format gui slot {_slot} of player with {Raid_.Odmena.10} to do nothing
+			close player's inventory
+			open chest with 3 rows named "&5&lOdmena" to player
+			wait 1 ticks
+			if inventory name of current inventory of player is not "&5&lOdmena":
+				stop
+			set {_slot} to 0
+			loop 27 times:
+				add 1 to {_slot}
+				chance of 5%:
+					set slot {_slot} of player's current inventory to {Raid_.Odmena.1}
+				else:
+					chance of 5%:
+						set slot {_slot} of player's current inventory to {Raid_.Odmena.2}
+					else:
+						chance of 5%:
+							set slot {_slot} of player's current inventory to {Raid_.Odmena.3}
+						else:
+							chance of 5%:
+								set slot {_slot} of player's current inventory to {Raid_.Odmena.4}
+							else:
+								chance of 5%:
+									set slot {_slot} of player's current inventory to {Raid_.Odmena.5}
+								else:
+									chance of 5%:
+										set slot {_slot} of player's current inventory to {Raid_.Odmena.6}
+									else:
+										chance of 5%:
+											set slot {_slot} of player's current inventory to {Raid_.Odmena.7}
+										else:
+											chance of 5%:
+												set slot {_slot} of player's current inventory to {Raid_.Odmena.8}
+											else:
+												chance of 5%:
+													set slot {_slot} of player's current inventory to {Raid_.Odmena.9}
+												else:
+													chance of 5%:
+														set slot {_slot} of player's current inventory to {Raid_.Odmena.10}
+			stop
+		if arg-1 is "1":
+			set {Raid_.Odmena.1} to tool of player
+		if arg-1 is "2":
+			set {Raid_.Odmena.2} to tool of player
+		if arg-1 is "3":
+			set {Raid_.Odmena.3} to tool of player
+		if arg-1 is "4":
+			set {Raid_.Odmena.4} to tool of player
+		if arg-1 is "5":
+			set {Raid_.Odmena.5} to tool of player
+		if arg-1 is "6":
+			set {Raid_.Odmena.6} to tool of player
+		if arg-1 is "7":
+			set {Raid_.Odmena.7} to tool of player
+		if arg-1 is "8":
+			set {Raid_.Odmena.8} to tool of player
+		if arg-1 is "9":
+			set {Raid_.Odmena.9} to tool of player
+		if arg-1 is "10":
+			set {Raid_.Odmena.10} to tool of player
+
+#on damage:
+#	if attacker is not player:
+#		stop
+#	if victim is named "&c&lStrong Zombie":
+#		loop blocks in radius 1 around victim:
+#			if loop-block is air:
+#				if block above loop-block is air:
+#					add loop-block's location to {_locs::*}
+#		set {_loc} to random element of {_locs::*}
+#		set {_health} to health of victim
+#		set {_healthmax} to max health of victim
+#		set {_damage} to {_healthmax} - {_health} parsed as number
+#		spawn an armor stand at {_loc}
+#		set name of last spawned entity to "&c%{_damage}%"
+#		set {_stand} to last spawned armor stand
+#		add "{CustomNameVisible:1,NoGravity:1b,Small:1,Invisible:1,NoBasePlate:1,DisabledSlots:2039583}" to nbt of {_stand}
+#		loop entities in radius 5 around {_loc}:
+#			if loop-entity is armor stand:
+#				if name of loop-entity contains "&c1" or "&c2" or "&c3" or "&c4" or "&c5" or "&c6" or "&c7" or "&c8" or "&c9" or "&c0":
+#					wait 0.5 second
+#					delete loop-entities
+
+
