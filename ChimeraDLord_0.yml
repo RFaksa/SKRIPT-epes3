@@ -1,0 +1,412 @@
+#============================================================
+#Gérie
+#============================================================
+PraseciNemrtvy:
+  Mobtype: PIG_ZOMBIE
+  Display: '&cPraseci nemrtvy'
+  Health: 450
+  Damage: 10
+  Equipment:
+  - MecPanaGerie:0
+  Drops:
+    #penize
+    - money 30
+    - TrofejZGerie 1 0.5
+    - Knihomol4 1 0.03
+    - PraseciZbrojHelmaDrop 1 0.01
+    - PraseciZbrojZbrojDrop 1 0.01
+    - PraseciZbrojKalhotyDrop 1 0.01
+    - PraseciZbrojBotyDrop 1 0.01
+    - PraseciMecDrop 1 0.01
+    - GerieDropPotion1 1 0.05
+    - GerieDropPotion2 1 0.05
+    - GerieDropPotion3 1 0.05
+    - iron_pickaxe 1 0.1
+  #Vzacne truhly
+    - Stribrna_truhla 1 0.01
+    - Zlata_truhla 1 0.005
+    - Diamantova_truhla 1 0.001
+  KillMessages:
+  - '&c&o<target.name>&c&o byl zabit Prasecim nemrtvym...'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.7
+    FollowRange: 25
+    MovementSpeed: 0.23
+    MaxCombatDistance: 25
+    Despawn: true
+    Silent: false
+    NoDamageTicks: 12
+  Skills:
+  - effect:particles{particle=flame;a=50;s=0.1;hs=0.7;vs=2.5} @self ~onTimer:300
+ZombieVazal:
+  Mobtype: ZOMBIE
+  Display: '&cZombie Vazal'
+  Health: 500
+  Damage: 10
+  Equipment:
+  - Diamond_chestplate:3
+  - diamond_leggings:2
+  - diamond_boots:1
+  - MecPanaGerie:0
+  Drops:
+    #penize
+    - money 50
+    - TrofejZGerie 1 0.75
+    - Knihomol4 1 0.03
+    - GeriaZbrojHelmaDrop 1 0.01
+    - GeriaZbrojZbrojDrop 1 0.01
+    - GeriaZbrojKalhotyDrop 1 0.01
+    - GeriaZbrojBotyDrop 1 0.01
+    - PraseciLukDrop 1 0.01
+    - PraseciMecDrop 1 0.01
+    - GerieDropPotion1 1 0.05
+    - GerieDropPotion2 1 0.05
+    - GerieDropPotion3 1 0.05
+    - iron_pickaxe 1 0.1
+  #Vzacne truhly
+    - Stribrna_truhla 1 0.01
+    - Zlata_truhla 1 0.005
+    - Diamantova_truhla 1 0.001
+  KillMessages:
+  - '&c&o<target.name>&c&o byl zabit Zombie Vazalem...'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.9
+    FollowRange: 30
+    MovementSpeed: 0.19
+    MaxCombatDistance: 25
+    Despawn: true
+    Silent: false
+    NoDamageTicks: 12
+  Skills:
+  - effect:particles{particle=flame;a=50;s=0.1;hs=0.7;vs=2.5} @self ~onTimer:300
+  - potion{type=ABSORPTION;duration=7000;lvl=1} @self ~onSpawn
+  - potion{type=HARM;duration=1;lvl=1} @PlayersInRadius{r=5} ~onDamaged =350
+  - potion{type=HARM;duration=1;lvl=1} @PlayersInRadius{r=5} ~onDamaged =100
+  - potion{type=POISON;duration=80;lvl=0} @PlayersInRadius{r=5} ~onDamaged =225
+PanGerie:
+  Mobtype: PIG_ZOMBIE
+  Display: '&6&lPán Gérie'
+  Health: 2750
+  Damage: 10
+  Equipment:
+  - PanGerieZbroj:3
+  - PanGerieKalhoty:2
+  - PanGerieBoty:1
+  - MecPanaGerie:0
+  Drops:
+    #penize
+    - money 75
+    - TrofejZGerie 1-5 1
+    - Knihomol4 1 0.03
+    - GeriaZbrojHelmaDrop 1 0.05
+    - GeriaZbrojZbrojDrop 1 0.05
+    - GeriaZbrojKalhotyDrop 1 0.05
+    - GeriaZbrojBotyDrop 1 0.05
+    - PraseciLukDrop 1 0.1
+    - PraseciMecDrop 1 0.1
+    - PraseciZbrojHelmaDrop 1 0.1
+    - PraseciZbrojZbrojDrop 1 0.1
+    - PraseciZbrojKalhotyDrop 1 0.1
+    - PraseciZbrojBotyDrop 1 0.1
+    - GerieDropPotion1 1 0.1
+    - GerieDropPotion2 1 0.1
+    - GerieDropPotion3 1 0.1
+    - iron_pickaxe 1 0.1
+  #Vzacne truhly
+  #Dodat do dropů Geria truhlu!!!! (jeste neni)
+    - Stribrna_truhla 1 0.25
+    - Zlata_truhla 1 0.1
+    - Diamantova_truhla 1 0.01
+  BossBar:
+    Enabled: true
+    Title: '&6&lPán Gérie'
+    Range: 25
+    Color: YELLOW
+  KillMessages:
+  - '&c&o<target.name>&c&o byl zabit Pánem Gérie!'
+  - '&c&oPán Gérie se naštval a rozsekal <target.name>!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.7
+    FollowRange: 20
+    MovementSpeed: 0.26
+    MaxCombatDistance: 25
+    Despawn: true
+    Silent: false
+    NoDamageTicks: 8
+  Skills:
+  - effect:particles{particle=flame;a=50;s=0.1;hs=0.7;vs=2.5} @self ~onTimer:300
+  - potion{type=HARM;duration=1;lvl=1} @PlayersInRadius{r=5} ~onDamaged =2500
+  - potion{type=POISON;duration=80;lvl=0} @PlayersInRadius{r=5} ~onDamaged =2000
+  - potion{type=HARM;duration=1;lvl=1} @PlayersInRadius{r=5} ~onDamaged =1500
+  - potion{type=POISON;duration=80;lvl=0} @PlayersInRadius{r=5} ~onDamaged =1000
+  - potion{type=HARM;duration=1;lvl=1} @PlayersInRadius{r=5} ~onDamaged =500
+  - potion{type=SLOW;duration=140;lvl=0} @PlayersInRadius{r=5} ~onDeath
+#============================================================
+#Aker
+#============================================================
+AkerskyProbuzenyNemrtvy1:
+  Mobtype: skeleton
+  Display: '&6&lAkersky probuzeny nemrtvy'
+  Health: 250
+  Damage: 30
+  Equipment:
+  - AkerZbroj2:3
+  - AkerKalhoty2:2
+  - AkerBoty2:1
+  - AkerMaska2:4
+  - BOW:0
+  KillMessages:
+  - '&e&o<target.name>&e&o byl zabit Akerskym bojovnikem!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.95
+    FollowRange: 8
+    MovementSpeed: 0.29
+    MaxCombatDistance: 10
+    Despawn: true
+    Silent: false
+    NoDamageTicks: 5
+  Skills:
+  - potion{type=HARM;duration=1;lvl=1} @target ~onHit
+  - summon{type=Subzer;amount=1;radius=2;yradius=0} @self ~onDeath
+AkerskyProbuzenyNemrtvy2:
+  Mobtype: ZOMBIE
+  Display: '&6&lAkersky probuzeny nemrtvy'
+  Health: 250
+  Damage: 30
+  Equipment:
+  - AkerZbroj2:3
+  - AkerKalhoty2:2
+  - AkerBoty2:1
+  - AkerMaska2:4
+  KillMessages:
+  - '&e&o<target.name>&e&o byl zabit Akerskym bojovnikem!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.95
+    FollowRange: 5
+    MovementSpeed: 0.29
+    MaxCombatDistance: 10
+    Despawn: true
+    Silent: true
+    NoDamageTicks: 7
+  Skills:
+  - potion{type=HARM;duration=1;lvl=0} @target ~onDeath
+  - summon{type=Lenmen;amount=1;radius=2;yradius=0} @self ~onDeath
+Subzer:
+  Mobtype: ZOMBIE
+  Display: '&e&lSubzer'
+  Health: 800
+  Damage: 15
+  Disguise:
+    Type: player
+    Skin: 'risa11'
+    Player: '&e&lSubzer'
+    Burning: false
+    Invisible: false
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Equipment:
+  - AkerZbroj2:3
+  - AkerKalhoty3:2
+  - AkerBoty2:1
+  - AkerMaska3:4
+  - ZaboruvMec:0
+  KillMessages:
+  - '&e&o<target.name>&e&o byl zabit Lenmenem!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.95
+    FollowRange: 7
+    MovementSpeed: 0.26
+    MaxCombatDistance: 10
+    Despawn: true
+    Silent: true
+    NoDamageTicks: 9
+  Skills:
+  - message{m="&b<mob.name><&co> &c<mob.hp>/<mob.mhp>"}<&co> @target ~onDamaged 0.08
+  - potion{type=ABSORPTION;duration=999999;lvl=1} @self ~onSpawn
+  - potion{type=WITHER;duration=150;lvl=0} @target ~onHit
+  - potion{type=SLOW;duration=100;lvl=5} @target ~onTimer:200
+  - potion{type=BLINDNESS;duration=100;lvl=4} @target ~onTimer:200
+  - effect:particles{particle=reddust;color=#a18900;amount=300;hs=2;vs=3;S=0.1} @target ~onTimer:200
+  - effect:particlesphere{particle=flame;amount=30;y=0;r=0.5;s=0.1} @target ~onTimer:200
+  - damage{amount=3;ignoreArmor=true} @PIR{r=5} ~onDamaged =400
+Lenmen:
+  Mobtype: ZOMBIE
+  Display: '&6&lLenmen'
+  Health: 800
+  Damage: 15
+  Disguise:
+    Type: player
+    Skin: 'risa11'
+    Player: '&6&lLenmen'
+    Burning: false
+    Invisible: false
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Equipment:
+  - AkerZbroj2:3
+  - AkerKalhoty3:2
+  - AkerBoty2:1
+  - AkerMaska3:4
+  - blaze_rod:0
+  KillMessages:
+  - '&e&o<target.name>&e&o byl zabit Lenmenem!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.90
+    FollowRange: 7
+    MovementSpeed: 0.19
+    MaxCombatDistance: 10
+    Despawn: true
+    Silent: true
+    NoDamageTicks: 8
+  Skills:
+  - message{m="&b<mob.name><&co> &c<mob.hp>/<mob.mhp>"}<&co> @target ~onDamaged 0.08
+  - potion{type=ABSORPTION;duration=999999;lvl=1} @self ~onSpawn
+  - summon{type=Lenmenskill1;amount=1;radius=4;yradius=0} @self ~onDamaged =700
+  - effect:particles{particle=reddust;color=#a18900;amount=300;hs=2;vs=3;S=0.1} @target ~onDamaged =700
+  - summon{type=Lenmenskill1;amount=1;radius=4;yradius=0} @self ~onDamaged =300
+  - effect:particles{particle=reddust;color=#a18900;amount=300;hs=2;vs=3;S=0.1} @target ~onDamaged =300
+  - summon{type=Lenmenskill2;amount=1;radius=1;yradius=0} @Target ~onTimer:200
+  - effect:particles{particle=reddust;color=#a18900;amount=300;hs=2;vs=3;S=0.1} @target ~onTimer:200
+  - potion{type=SLOW;duration=100;lvl=4} @target ~onDamaged =650
+  - potion{type=BLINDNESS;duration=100;lvl=4} @target ~onDamaged =650
+  - potion{type=SLOW;duration=100;lvl=4} @target ~onDamaged =350
+  - potion{type=BLINDNESS;duration=100;lvl=4} @target ~onDamaged =350
+Lenmenskill1:
+  Type: silverfish
+  Display: '&e&lLenmenskill'
+  Health: 300
+  Damage: 0
+  AIGoalSelectors:
+  - 0 clear
+  - 1 clear
+  AITargetSelectors:
+  - 0 clear
+  - 1 clear
+  Disguise:
+    Type: armor_stand
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Options:
+    MovementSpeed: 0.01
+    KnockbackResistance: 1
+    Silent: true
+  Skills:
+  - message{m="&e&oLenmen vyvolal pisecnou bouri."} @PlayersInRadius{r=5} ~onSpawn
+  - potion{type=INVISIBILITY;duration=3000;lvl=1} @self ~onSpawn
+  - effect:particlesphere{particle=flame;amount=50;y=0;r=0.5;s=0.1} @self ~onSpawn
+  - potion{type=HARM;duration=1;lvl=2} @PlayersInRadius{r=3} ~onSpawn
+  - setgravity{g=false} @self ~onSpawn
+  - velocity{m=set;x=0;y=0;z=0} @self ~onspawn
+  - skill {s=mobkasebevrazda} @self ~onspawn
+Lenmenskill2:
+  Type: silverfish
+  Display: '&e&lLenmenskill'
+  Health: 300
+  Damage: 0
+  AIGoalSelectors:
+  - 0 clear
+  - 1 clear
+  AITargetSelectors:
+  - 0 clear
+  - 1 clear
+  Disguise:
+    Type: armor_stand
+    Burning: false
+    Blocking: false
+    Invisible: true
+    ShowName: false
+    Sneaking: false
+    Sprinting: false
+    ModifyBoundingBox: false
+  Options:
+    MovementSpeed: 0.01
+    KnockbackResistance: 1
+    Silent: true
+  Skills:
+  - potion{type=INVISIBILITY;duration=3000;lvl=1} @self ~onSpawn
+  - effect:particlesphere{particle=flame;amount=30;y=0;r=0.5;s=0.1} @self ~onSpawn
+  - potion{type=HARM;duration=1;lvl=0} @PlayersInRadius{r=3} ~onSpawn
+  - lightning @self ~onSpawn
+  - setgravity{g=false} @self ~onSpawn
+  - velocity{m=set;x=0;y=0;z=0} @self ~onspawn
+  - skill {s=mobkasebevrazda} @self ~onspawn
+AkerskaMumie:
+  Mobtype: HUSK
+  Display: '&e&lMumie'
+  Health: 700
+  Damage: 30
+  KillMessages:
+  - '&e&o<target.name>&e&o byl zabit Mumií!'
+  Options:
+    PreventRenaming: true
+    PreventLeashing: true
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    KnockbackResistance: 0.95
+    FollowRange: 15
+    MovementSpeed: 0.26
+    MaxCombatDistance: 10
+    Despawn: true
+    Silent: false
+    NoDamageTicks: 5
+  Skills:
+  - message{m="&e&oProbudil si Mumii"} @PlayersInRadius{r=5} ~onSpawn
+  - potion{type=ABSORPTION;duration=999999;lvl=0} @self ~onSpawn
+  - potion{type=SLOW;duration=200;lvl=1} @target ~onHit
+  - potion{type=WITHER;duration=200;lvl=1} @target ~onDamaged =600
+  - effect:particles{particle=reddust;color=#474747;amount=50;hs=1;vs=2.5;S=1} @self ~onDamaged =600
+  - potion{type=WITHER;duration=200;lvl=1} @target ~onDamaged =300
+  - effect:particles{particle=reddust;color=#474747;amount=50;hs=1;vs=2.5;S=1} @self ~onDamaged =300                                                                                                                                                                                                                                                                                
