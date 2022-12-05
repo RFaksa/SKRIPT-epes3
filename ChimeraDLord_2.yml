@@ -1,0 +1,339 @@
+rytirbuff1:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=rytirbuff1;volume=1.0;pitch=1}
+  - potion{type=SPEED;duration=100;level=1} @self
+  - potion{type=INCREASE_DAMAGE;duration=50;level=2} @self
+rytirbuff2:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=vudcebuff1;volume=1.0;pitch=1}
+  - message{m="<mob.name> se chysta k utoku"} @PlayersInRadius{r=10}
+  - delay 10
+  - effect:sound{s=rytirbuff2;volume=1.0;pitch=1}
+  - delay 20
+  - leap{velocity=100}
+  - delay 10
+  - effect:sound{s=omraceni;volume=1.0;pitch=1}
+  - damage{amount=3;ignorearmor=true} @PlayersInRadius{r=3}
+rytirbuff3:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=rytirbuff1;volume=1.0;pitch=1}
+  - potion{type=SPEED;duration=50;level=3} @self
+  - potion{type=INCREASE_DAMAGE;duration=50;level=2} @self
+rytirbuff4:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=vudcebuff2;volume=1.0;pitch=1}
+  - message{m="<mob.name> se chysta k utoku"} @PlayersInRadius{r=10}
+  - delay 10
+  - effect:sound{s=rytirbuff2;volume=1.0;pitch=1}
+  - delay 20
+  - damage{amount=2;ignorearmor=true} @PlayersInRadius{r=2}
+  - message{m="<mob.name> se rozjel berserkem"} @PlayersInRadius{r=10}
+  - delay 5
+  - damage{amount=1;ignorearmor=true} @PlayersInRadius{r=3}
+  - delay 5
+  - damage{amount=1;ignorearmor=true} @PlayersInRadius{r=3}
+  - delay 5
+  - damage{amount=1;ignorearmor=true} @PlayersInRadius{r=5}
+  - effect:sound{s=omraceni;volume=1.0;pitch=1}
+rytirbuff5:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=rytirbuff1;volume=1.0;pitch=1}
+  - potion{type=SPEED;duration=50;level=1} @self
+  - potion{type=INCREASE_DAMAGE;duration=50;level=2} @self
+rytirbuff6:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=buffaktivace;volume=1.0;pitch=1}
+  - message{m="<mob.name> se chysta k utoku"} @PlayersInRadius{r=10}
+  - delay 10
+  - effect:sound{s=rytirbuff2;volume=1.0;pitch=1}
+  - delay 20
+  - message{m="<mob.name> prastil <target.name> kladivem"} @PlayersInRadius{r=5}
+  - potion{type=SLOW;duration=200;level=1}
+  - potion{type=BLINDNESS;duration=200;level=1} 
+  - effect:sound{s=omraceni;volume=1.0;pitch=1} 
+rytirbuff7:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=gladiatorbuff1;volume=1.0;pitch=0.7} 
+rytirbuff8:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=gladiatorau1;volume=1.0;pitch=1} 
+rytirbuff9:
+  Cooldown: 5
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=gladiatorau2;volume=1.0;pitch=1}
+asylkopavoukskill1:
+  Cooldown: 30
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=pavouk2;volume=1.0;pitch=1}
+  - message{m="<mob.name> omotal kolem <target.name> pavučinu"} @PlayersInRadius{r=5}
+  - delay 5
+  - potion{type=SLOW;duration=80;level=5} @target
+  - potion{type=BLINDNESS;duration=80;level=5} @target
+asylkopavoukskill2:
+  Cooldown: 15
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=pavouk3;volume=1.0;pitch=1}
+  - message{m="<mob.name> se zakousl do <target.name> a vpustil do nej jed"} @PlayersInRadius{r=10}
+  - delay 5
+  - potion{type=POISON;duration=300;level=1} @target
+asylkopavoukskill3:
+  Cooldown: 50
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=pavouk1;volume=1.0;pitch=1}
+  - message{m="<mob.name> plivl na <target.name> pavučinu"} @PlayersInRadius{r=5}
+  - delay 5
+  - potion{type=SLOW;duration=200;level=1} @target
+  - potion{type=BLINDNESS;duration=200;level=1} @target
+VyvolavacSkill1:
+  Cooldown: 50
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=duch3;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina carovat"} @PlayersInRadius{r=10}
+  - delay 15
+  - potion{type=SLOW;duration=200;level=1} @self
+  - lightning{d=2} @PIR{r=10}
+  - delay 15
+  - lightning{d=2} @PIR{r=10}
+  - delay 15
+  - lightning{d=2} @PIR{r=10}
+VyvolavacSkill2:
+  Cooldown: 50
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=duch2;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina carovat"} @PlayersInRadius{r=10}
+  - potion{type=SPEED;duration=200;level=1} @self
+  - potion{type=SLOW;duration=100;level=0} @target
+DuchSkill1:
+  Cooldown: 10
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=duch1;volume=1.0;pitch=1}
+  - potion{type=SPEED;duration=100;level=1} @self
+MagmarSkill1:
+  Cooldown: 0
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=divosisipka;volume=1.0;pitch=1}
+  - jump{velocity=1}
+MagmarSkill2:
+  Cooldown: 10
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=velikonoce;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina skakat"} @target
+  - jump{velocity=1}
+  - delay 30
+  - potion{type=HARM;duration=1;level=1} @PlayersInRadius{r=3}
+  - jump{velocity=1}
+  - delay 30
+  - potion{type=HARM;duration=1;level=1} @PlayersInRadius{r=3}
+  - jump{velocity=1}
+  - delay 30
+  - potion{type=HARM;duration=1;level=1} @PlayersInRadius{r=3}
+  - jump{velocity=1}
+AsylkoSkeletonSkill1:
+  Cooldown: 20
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=bludickabuff1;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina kouzlit"} @target
+  - jump{velocity=0.5}
+  - delay 15
+  - potion{type=levitation;duration=50;level=1} @target
+  - delay 15
+  - potion{type=POISON;duration=80;level=0} @target
+AsylkoSkeletonSkill2:
+  Cooldown: 15
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=bludickabuff1;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina kouzlit"} @target
+  - jump{velocity=0.5}
+  - delay 15
+  - potion{type=harm;duration=1;level=0} @target
+  - delay 15
+  - potion{type=wither;duration=200;level=0} @target
+AsylkoSkeletonSkill3:
+  Cooldown: 25
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=bludickabuff1;volume=1.0;pitch=1}
+  - message{m="<mob.name> zacina kouzlit"} @target
+  - jump{velocity=0.5}
+  - delay 15
+  - potion{type=slow;duration=80;level=0} @target
+  - delay 15
+  - potion{type=poison;duration=200;level=1} @target
+Atlasskill1:
+  Cooldown: 30
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=bludickabuff1;volume=1.0;pitch=1}
+  - effect:particlering{particle=blockcrack_1;radius=1;points=32;amount=50;hS=1;vS=0} @Self
+  - effect:particlering{particle=blockcrack_101;radius=2;points=32;amount=50;hS=1;vS=0} @Self
+  - effect:particlering{particle=blockcrack_1;radius=3;points=32;amount=50;hS=1;vS=0} @Self
+  - effect:particlering{particle=blockcrack_101;radius=4;points=32;amount=100;hS=1;vS=0} @Self
+  - effect:particlering{particle=blockcrack_1;radius=5;points=32;amount=150;hS=1;vS=0} @Self
+  - message{m="<mob.name>&8 se podivne otocil"} @PlayersInRadius{r=6}
+  - delay 5
+  - potion{type=BLINDNESS;duration=200;level=1} @PlayersInRadius{r=6}
+  - delay 5
+  - potion{type=SLOW;duration=200;level=5} @PlayersInRadius{r=6}
+  - potion{type=harm;duration=1;level=0} @PlayersInRadius{r=6}
+AtlasStrela:
+  Cooldown: 0
+  Conditions:
+  #- incombat true
+  Skills:
+  - potion{type=SLOW;d=200;level=10} @self
+  - delay 80
+  - missile{onTick=AtlasStrela-Tick;onHit=AtlasStrela-Hit;v=3;i=1;hR=1;vR=1;syo=1;yStartOffset=2;yOffset=1}
+  - sound {s=entity.elder_guardian.curse}
+AtlasStrela-Tick:
+  Skills:
+  - effect:particles{p=endRod;amount=20;speed=0;hR=0.2;vR=0.2;speed=0.07} @origin
+  - effect:particles{p=enchantmenttable;amount=7;speed=0;hR=0.2;vR=0.2;speed=0.07} @origin
+AtlasStrela-Hit:
+  Skills:
+  - potion{type=LEVITATION;duration=100;lvl=1}
+  - potion{type=BLINDNESS;duration=100;lvl=1}
+VstavamePanove:
+  Cooldown: 0
+  Conditions:
+  - offgcd
+  Skills:
+  - effect:sound{s=racoon;volume=1.0;pitch=1}
+  - delay 5
+  - damage{amount=450;ignorearmor=true} @self
+mobkasebevrazda:
+  Cooldown: 0
+  Conditions:
+  - offgcd
+  Skills:
+  - delay 30
+  - damage{amount=5000;ignorearmor=true} @self
+NenavistParkour:
+  Cooldown: 0
+  Conditions:
+  - offgcd
+  Skills:
+  - delay 500
+  - command{c="mm m kill NenavistParkour"}
+AsylkoSkeletonSkill5:
+  Cooldown: 50
+  Conditions:
+  Skills:
+  - message{m="&8<mob.name>&8 zacina carovat!"} @PIR{r=3}
+  - sound {s=divokyzarikavac2;volume=1;pitch=1} 
+  - Delay 25
+  - effect:particlering{particle=largesmoke;radius=3;points=64;amount=1;hS=0.001;vS=0.001;repeatInterval=5;repeat=4;yStartOffset=0.1;yOffset=0.1} @self
+  - Delay 10
+  - effect:particlering{particle=largesmoke;radius=2;points=32;amount=1;hS=0.001;vS=0.001;repeatInterval=5;repeat=3;yStartOffset=0.1;yOffset=0.1} @self
+  - Delay 10
+  - effect:particlering{particle=largesmoke;radius=1;points=32;amount=1;hS=0.001;vS=0.001;repeatInterval=5;repeat=2;yStartOffset=0.1;yOffset=0.1} @self 
+  - Delay 5
+  - potion{type=HARM;duration=1;level=1} @PIR{r=3}
+  - potion{type=SLOW;duration=20;level=5} @PIR{r=3}
+  - Delay 5
+  - damage{amount=5000} @self
+AsylkoSkeletonAu1:
+  Cooldown: 1
+  Conditions:
+  Skills:
+  - effect:sound{s=ENTITY.WITHER_SKELETON.HURT;volume=0.2;pitch=1}
+AsylkoSkeletonAu2:
+  Cooldown: 1
+  Conditions:
+  Skills:
+  - effect:sound{s=ENTITY.WITHER_SKELETON.DEATH;volume=0.2;pitch=1}
+AsylkoSkeletonSkill16:
+  Cooldown: 0
+  Conditions:
+  #- incombat true
+  Skills:
+  - potion{type=SLOW;d=120;level=10} @self
+  - sound {s=divokyzarikavac1;volume=1;pitch=1}
+  - delay 70
+  - missile{onTick=AsylkoSkeletonSkill16-Tick;onHit=AsylkoSkeletonSkill16-Hit;v=6;i=1;hR=1;vR=1;syo=1;yStartOffset=2;yOffset=1}
+  - sound {s=ohnivka1;volume=1;pitch=1}
+AsylkoSkeletonSkill16-Tick:
+  Skills:
+  - effect:particlesphere{particle=reddust;color=#400715;amount=100;speed=0;hR=0.75;vR=0.75;radius=0.75;speed=0.07} @origin
+  - effect:particlesphere{particle=reddust;color=#400715;amount=50;speed=0;hR==0.4;vR==0.4;radius=0.4;speed=0.07} @origin
+  - effect:particles{p=flame;amount=7;speed=0;hR=0.2;vR=0.2;speed=0.07} @origin
+AsylkoSkeletonSkill16-Hit:
+  Skills:
+  - potion{type=HARM;duration=1;lvl=2}
+  - potion{type=LEVITATION;duration=100;lvl=0}
+  - potion{type=BLINDNESS;duration=100;lvl=0}
+AsylkoSkeletonSkill17:
+  Cooldown: 10
+  Conditions:
+  #- incombat true
+  Skills:
+  - summon{type=AsylkoSkeleton1cil;amount=3;radius=2;yradius=1} @target
+  - potion{type=SLOW;d=120;level=10} @self
+  - sound {s=divokyzarikavac1;volume=0.5;pitch=1}
+  - delay 70
+  - missile{onTick=AsylkoSkeletonSkill17-Tick;onHit=AsylkoSkeletonSkill17-Hit;v=3;i=1;hR=1;vR=1;syo=1;yStartOffset=2;yOffset=1}
+  - sound {s=ohnivka1;volume=1;pitch=1}
+AsylkoSkeletonSkill17-Tick:
+  Skills:
+  - effect:particlesphere{particle=reddust;color=#6b6e6d;amount=10;speed=0;hR==0.4;vR==0.4;radius=0.4;speed=0.07} @origin
+  - effect:particles{p=flame;amount=7;speed=0;hR=0.2;vR=0.2;speed=0.07} @origin
+AsylkoSkeletonSkill17-Hit:
+  Skills:
+  - potion{type=LEVITATION;duration=100;lvl=0}
+  - damage{amount=1000}
+AsylkoSkeletonSkill17Death:
+  Skills:
+  - sound {s=kouzlox10;volume=1;pitch=1}
+  - effect:particles{p=flame;amount=7;speed=0;hR=0.2;vR=0.2;speed=0.07} @origin
+  - effect:particlesphere{particle=reddust;color=#6b6e6d;amount=50;speed=0;hR==5;vR==5;radius=0.4;speed=0.07} @origin
+mobkasebevrazda2:
+  Skills:
+  - Delay 100
+  - command{c="mm m kill AsylkoSkeleton1cil"}
